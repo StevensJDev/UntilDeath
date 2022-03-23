@@ -188,6 +188,8 @@ namespace MarsFPSKit
 
             public void RoundEnd(int round)
             {
+                //Call statistics
+                main.gameInformation.statistics.OnRound(main, round);
                 gameOverScreenText.text = "You lasted " + (round+1).ToString() + " rounds.";
 
                 //Just play that sound

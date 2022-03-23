@@ -24,6 +24,16 @@ namespace MarsFPSKit
         public abstract void OnAssist(Kit_IngameMain main);
 
         /// <summary>
+        /// Called when we go up a round
+        /// </summary>
+        public abstract void OnRound(Kit_IngameMain main, int gameRounds);
+
+        /// <summary>
+        /// Called when we escape the level
+        /// </summary>
+        public abstract void OnEscape(Kit_IngameMain main);
+
+        /// <summary>
         /// Called when we were killed
         /// </summary>
         /// <param name="weapon"></param>

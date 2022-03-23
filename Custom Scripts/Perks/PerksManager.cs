@@ -168,7 +168,6 @@ namespace MarsFPSKit
 
             // Removes speedcola
             runtimeData.hasSpeedCola = false;
-            removeSpeedCola();
             speedcolaUI.SetActive(false);
 
             // Removes bunnyhop
@@ -180,10 +179,6 @@ namespace MarsFPSKit
             runtimeData.hasStaminUp = false;
             pb.updateStamina(6f, 4f, true);
             staminUpUI.SetActive(false);
-        }
-
-        public void removeSpeedCola() {
-            // TODO REVERT RELOAD TIMES
         }
     }
 }

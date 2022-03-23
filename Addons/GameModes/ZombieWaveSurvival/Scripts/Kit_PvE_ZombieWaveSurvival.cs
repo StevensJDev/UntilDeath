@@ -408,6 +408,7 @@ namespace MarsFPSKit
                     //Check if everyone is dead
                     if (pb.main.allActivePlayers.Count <= 0 || (pb.main.allActivePlayers.Count == 1 && pb.main.allActivePlayers[0] == pb))
                     {
+                        pb.main.gameInformation.statistics.Save(pb.main);
                         Debug.Log("Everyone is dead. Game over.");
                         //Set to -1
                         pb.main.gameModeStage = -1;

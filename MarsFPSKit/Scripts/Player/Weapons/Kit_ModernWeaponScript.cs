@@ -236,6 +236,8 @@ namespace MarsFPSKit
             /// </summary>
             public int RPM = 600;
             private float fireRate = 0.1f;
+            private float originalFireRate = 0.1f;
+            private bool hasDoubleTap = false;
             /// <summary>
             /// How many bullets do we have per mag
             /// </summary>
@@ -715,6 +717,7 @@ namespace MarsFPSKit
                 gameGunID = id;
                 //Set RPM
                 fireRate = 60f / RPM;
+                originalFireRate = fireRate;
                 OriReloadTimeOne = reloadTimeOne;
                 OriReloadTimeTwo = reloadTimeTwo;
                 OriReloadEmptyTimeOne = reloadEmptyTimeOne;
@@ -953,11 +956,23 @@ namespace MarsFPSKit
 
             public override void CalculateWeaponUpdate(Kit_PlayerBehaviour pb, object runtimeData)
             {
+                if (pb.perksManager.playerHasDoubleTap(pb) && !hasDoubleTap) {
+                    fireRate *= 2;
+                    
+                    hasDoubleTap = true;
+                } else {
+                    fireRate = originalFireRate;
+                }
+
                 if (runtimeData != null && runtimeData.GetType() == typeof(WeaponControllerRuntimeData))
                 {
                     WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
                     
                     if (data.weaponRenderer.anim) {
+                        if (hasDoubleTap) {
+                        data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                        }
+
                         // Speed cola speeds up animation
                         if (pb.perksManager.playerHasSpeedCola(pb)) {
                                 data.weaponRenderer.anim.SetFloat("reloadAnimationSpeed", animationMultiplier);
@@ -2430,6 +2445,10 @@ namespace MarsFPSKit
                         WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
 
                         if (data.weaponRenderer.anim) {
+                            if (hasDoubleTap) {
+                                data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                            }
+
                             // Speed cola speeds up animation
                             if (pb.perksManager.playerHasSpeedCola(pb)) {
                                 data.weaponRenderer.anim.SetFloat("reloadAnimationSpeed", animationMultiplier);
@@ -3237,6 +3256,10 @@ namespace MarsFPSKit
                         WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
 
                         if (data.weaponRenderer.anim) {
+                            if (hasDoubleTap) {
+                                data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                            }
+                            
                             // Speed cola speeds up animation
                             if (pb.perksManager.playerHasSpeedCola(pb)) {
                                 data.weaponRenderer.anim.SetFloat("reloadAnimationSpeed", animationMultiplier);
@@ -3351,6 +3374,10 @@ namespace MarsFPSKit
                         WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
 
                         if (data.weaponRenderer.anim) {
+                            if (hasDoubleTap) {
+                                data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                            }
+                            
                             // Speed cola speeds up animation
                             if (pb.perksManager.playerHasSpeedCola(pb)) {
                                 data.weaponRenderer.anim.SetFloat("reloadAnimationSpeed", animationMultiplier);
@@ -3686,6 +3713,10 @@ namespace MarsFPSKit
                         data.boltActionState = 2;
                         //Set fire rate
                         data.lastFire = Time.time + boltActionTimeLast;
+
+                        if (hasDoubleTap) {
+                            data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                        }
                     }
                     else
                     {
@@ -3695,12 +3726,20 @@ namespace MarsFPSKit
                         data.boltActionState = 1;
                         //Set fire rate
                         data.lastFire = Time.time + boltActionTimeNormal;
+
+                        if (hasDoubleTap) {
+                            data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                        }
                     }
                 }
                 else
                 {
                     //Set firerate
                     data.lastFire = Time.time;
+
+                    if (hasDoubleTap) {
+                        data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                    }
                 }
 
                 if (pb.isFirstPersonActive && pb.looking.GetPerspective(pb) == Kit_GameInformation.Perspective.FirstPerson)
@@ -3713,11 +3752,17 @@ namespace MarsFPSKit
                         //Last fire
                         if (data.weaponRenderer.anim)
                         {
+                            if (hasDoubleTap) {
+                                data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                            }
                             //Play animation
                             data.weaponRenderer.anim.Play("Fire Last", 0, 0f);
                         }
                         else if (data.weaponRenderer.legacyAnim)
                         {
+                            if (hasDoubleTap) {
+                                data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                            }
                             //Play animation
                             data.weaponRenderer.legacyAnim.Rewind(data.weaponRenderer.legacyAnimData.fireLast);
                             data.weaponRenderer.legacyAnim.Play(data.weaponRenderer.legacyAnimData.fireLast, PlayMode.StopAll);
@@ -3730,11 +3775,17 @@ namespace MarsFPSKit
                             //Normal fire (in aiming mode)
                             if (data.weaponRenderer.anim)
                             {
+                                if (hasDoubleTap) {
+                                    data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                                }
                                 //Play animation
                                 data.weaponRenderer.anim.Play("Fire Aim", 0, 0f);
                             }
                             else if (data.weaponRenderer.legacyAnim)
                             {
+                                if (hasDoubleTap) {
+                                    data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                                }
                                 //Play animation
                                 data.weaponRenderer.legacyAnim.Rewind(data.weaponRenderer.legacyAnimData.fireAim);
                                 data.weaponRenderer.legacyAnim.Play(data.weaponRenderer.legacyAnimData.fireAim, PlayMode.StopAll);
@@ -3745,11 +3796,17 @@ namespace MarsFPSKit
                             //Normal fire
                             if (data.weaponRenderer.anim)
                             {
+                                if (hasDoubleTap) {
+                                    data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                                }
                                 //Play animation
                                 data.weaponRenderer.anim.Play("Fire", 0, 0f);
                             }
                             else if (data.weaponRenderer.legacyAnim)
                             {
+                                if (hasDoubleTap) {
+                                    data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
+                                }
                                 //Play animation
                                 data.weaponRenderer.legacyAnim.Rewind(data.weaponRenderer.legacyAnimData.fire);
                                 data.weaponRenderer.legacyAnim.Play(data.weaponRenderer.legacyAnimData.fire, PlayMode.StopAll);

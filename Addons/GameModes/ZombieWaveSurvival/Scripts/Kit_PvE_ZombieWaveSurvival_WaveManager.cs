@@ -168,6 +168,9 @@ namespace MarsFPSKit
             {
                 zombiesAlive--;
 
+                //Call statistics
+                main.gameInformation.statistics.OnKill(main, 0);
+
                 //Check if all are dead
                 if (zombiesAlive <= 0 && zombiesLeftToSpawn <= 0)
                 {

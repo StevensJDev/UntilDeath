@@ -32,6 +32,19 @@ namespace MarsFPSKit
             /// </summary>
             public TextMeshProUGUI kd;
 
+            /// <summary>
+            /// Rounds survived
+            /// </summary>
+            public TextMeshProUGUI rounds;
+            /// <summary>
+            /// Rounds survived
+            /// </summary>
+            public TextMeshProUGUI highestRound;
+            /// <summary>
+            /// Number of times player escaped.
+            /// </summary>
+            public TextMeshProUGUI escaped;
+
             private void Awake()
             {
                 menuManager.onLogin.AddListener(delegate { RedrawStatistics(); });
@@ -45,8 +58,11 @@ namespace MarsFPSKit
 
                     //Just set texts
                     kills.text = "Kills: " + kspp.kills;
-                    assists.text = "Assists: " + kspp.assists;
+                    assists.text = "Perks:  " + kspp.assists;
                     deaths.text = "Deaths: " + kspp.deaths;
+                    rounds.text = "Rounds: " + kspp.rounds;
+                    highestRound.text = "Highest Round: " + kspp.highestRound;
+                    escaped.text = "Escapes: " + kspp.escapes;
                     if (kspp.deaths > 0) kd.text = "K/D: " + ((float)kspp.kills / kspp.deaths).ToString("F1");
                     else kd.text = "K/D: " + kspp.kills;
                 }
