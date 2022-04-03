@@ -9,9 +9,9 @@ namespace MarsFPSKit
     public class Kit_Flashlight : MonoBehaviour
     {
         /// <summary>
-        /// Light used for flashlight
+        /// Light used for Third Person flashlight
         /// </summary>
-        public Light flashlight;
+        public Light FPflashlight;
 
         /// <summary>
         /// Is the flashlight enabled?
@@ -24,7 +24,9 @@ namespace MarsFPSKit
                 isFlashlightEnabled = !isFlashlightEnabled;
             }
 
-            flashlight.enabled = isFlashlightEnabled;
+            if (FPflashlight) {
+                FPflashlight.enabled = isFlashlightEnabled;
+            }
         }
     }
 }

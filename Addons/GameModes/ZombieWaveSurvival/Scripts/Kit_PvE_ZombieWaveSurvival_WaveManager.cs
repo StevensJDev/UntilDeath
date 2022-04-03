@@ -25,6 +25,10 @@ namespace MarsFPSKit
             /// </summary>
             public int zombiesAlive;
             /// <summary>
+            /// Total number of zombies killed in the game.
+            /// </summary>
+            public int zombiesKilled;
+            /// <summary>
             /// Next spawn check (Photon Network Time)
             /// </summary>
             public double nextSpawnCheck;
@@ -167,6 +171,7 @@ namespace MarsFPSKit
             public void ZombieKilled()
             {
                 zombiesAlive--;
+                zombiesKilled++;
 
                 //Call statistics
                 main.gameInformation.statistics.OnKill(main, 0);

@@ -154,6 +154,7 @@ namespace MarsFPSKit
         /// </summary>
         [Header("Pause Menu, Use 'B' in the editor to open / close it")]
         public Kit_IngameMenuPauseMenu pauseMenu;
+        public int scoreMenuId = 7;
         #endregion
 
         /// <summary>
@@ -431,6 +432,11 @@ namespace MarsFPSKit
         /// </summary>
         [HideInInspector]
         public Kit_PlayerBehaviour myPlayer;
+        /// <summary>
+        /// Is the scoreboard currently opened?
+        /// </summary>
+        [HideInInspector]
+        public static bool isScoreboardOpen;
         /// <summary>
         /// Is the pause menu currently opened?
         /// </summary>
@@ -966,9 +972,33 @@ namespace MarsFPSKit
                 }
                 #endregion
 
+                #region Score Menu
+                if (pauseMenuState == 0 && Input.GetKeyDown(KeyCode.Tab) && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId)) {
+                    isScoreboardOpen = !isScoreboardOpen;
+                    if (isScoreboardOpen) {
+                        SwitchMenu(scoreMenuId, true);
+                        MarsScreen.lockCursor = false;
+                        //Chat callback
+                        chat.PauseMenuOpened();
+                        //Auto spawn system callack
+                        if (autoSpawnSystem && currentPvPGameModeBehaviour)
+                        {
+                            autoSpawnSystem.Interruption();
+                        }
+                    } else {
+                        SwitchMenu(ingameFadeId, true);
+                        pluginOnForceClose.Invoke();
+                        //Lock cursor
+                        MarsScreen.lockCursor = true;
+                        //Chat callback
+                        chat.PauseMenuClosed();
+                    }
+                }
+                #endregion
+
                 #region Pause Menu
                 //Check if the pause menu is ready to be opened and closed and if nothing is blocking it
-                if (pauseMenuState >= 0 && !currentVictoryScreen && !currentMapVoting && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId))
+                if (pauseMenuState >= 0 && !isScoreboardOpen && !currentVictoryScreen && !currentMapVoting && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId))
                 {
                     if (Input.GetKeyDown(KeyCode.Escape) && Application.platform != RuntimePlatform.WebGLPlayer || Input.GetKeyDown(KeyCode.B) && Application.isEditor || Input.GetKeyDown(KeyCode.M) && Application.platform == RuntimePlatform.WebGLPlayer || Application.isMobilePlatform && UnityStandardAssets.CrossPlatformInput.CrossPlatformInputManager.GetButtonDown("Pause")) //Escape (for non WebGL), B (For the editor), M (For WebGL)
                     {

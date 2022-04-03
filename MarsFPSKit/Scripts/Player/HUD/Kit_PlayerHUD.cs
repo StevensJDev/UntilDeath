@@ -25,6 +25,17 @@ namespace MarsFPSKit
         public Canvas canvas;
 
         /// <summary>
+        /// The root of the FPS display
+        /// </summary>
+        [Header("FPS")]
+        /// <summary>
+        /// What is the FPS set to?
+        /// </summary>
+        public TextMeshProUGUI fpsCounter;
+        private float hudRefreshRate = 1f;
+        private float timer;
+
+        /// <summary>
         /// The root of the HP display
         /// </summary>
         [Header("Health")]
@@ -329,6 +340,14 @@ namespace MarsFPSKit
 
         void Update()
         {
+            // Set FPS Counter
+            if (Time.unscaledTime > timer)
+            {
+                int currentFPS = (int)(1f / Time.unscaledDeltaTime);
+                fpsCounter.text = currentFPS.ToString();
+                timer = Time.unscaledTime + hudRefreshRate;
+            }
+
             //Update hitmarker alpha
             hitmarkerColor.a = Mathf.Clamp01(hitmarkerLastDisplay - Time.time);
             //Set the color

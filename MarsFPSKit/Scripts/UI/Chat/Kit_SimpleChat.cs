@@ -413,7 +413,7 @@ namespace MarsFPSKit
                         RedrawChat(); //Redraw
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.Y))
+                else if (Input.GetKeyDown(KeyCode.T))
                 {
                     if (!isChatOpen)
                     {

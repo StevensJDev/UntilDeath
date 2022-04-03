@@ -94,6 +94,10 @@ namespace MarsFPSKit
                 CheckForMoneyChange();
             }
 
+            public int getMoney() {
+                return money;
+            }
+
             void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
             {
                 if (stream.IsWriting)
