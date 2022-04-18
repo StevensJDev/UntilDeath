@@ -10,7 +10,7 @@
     public static class Kit_GameSettings
     {
         public static string userName = "Unassigned"; //Our current username
-        public static string selectedRegion = "eu"; //The current region that the user has selected
+        public static string selectedRegion = "us"; //The current region that the user has selected
 
         /// <summary>
         /// Should aiming be hold or toggle?

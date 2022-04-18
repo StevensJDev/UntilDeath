@@ -110,6 +110,8 @@ namespace MarsFPSKit
         /// </summary>
         public Toggle controlsCrouchToggle;
 
+        public List<Button> keyButtons;
+
         [Header("Gameplay")]
         /// <summary>
         /// Gameplay field of view

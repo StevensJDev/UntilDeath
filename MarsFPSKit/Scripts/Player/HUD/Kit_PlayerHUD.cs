@@ -644,7 +644,7 @@ namespace MarsFPSKit
                     }
 
                     //Add if weapon supports it!
-                    if (wqudd != null)
+                    if (wqudd != null && wqudd.sprite != null)
                     {
                         weaponQuickUseDisplayData.Add(wqudd);
                     }
@@ -713,8 +713,15 @@ namespace MarsFPSKit
                         GameObject go = Instantiate(weaponQuickUseDisplayPrefab, weaponQuickUseDisplayGo, false);
                         //Get
                         Image img = go.GetComponent<Image>();
+                        
+                        if (go.GetComponent<Image>() == null) {
+                            go.SetActive(false);
+                        }
+                        
                         //Add
                         weaponQuickUseDisplayActives.Add(img);
+
+                        
                     }
                 }
             }

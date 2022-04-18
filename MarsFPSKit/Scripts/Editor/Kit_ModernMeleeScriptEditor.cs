@@ -74,9 +74,9 @@ namespace MarsFPSKit
                 {
                     EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                     script.weaponName = EditorGUILayout.TextField("Weapon Name", script.weaponName);
-                    script.weaponPicture = EditorGUILayout.ObjectField("Weapon Picture", script.weaponPicture, typeof(Sprite), false) as Sprite;
-                    script.weaponHudPicture = EditorGUILayout.ObjectField("Weapon HUD Picture", script.weaponHudPicture, typeof(Sprite), false) as Sprite;
-                    script.weaponQuickUsePicture = EditorGUILayout.ObjectField("Weapon HUD (Quick Use) Picture", script.weaponQuickUsePicture, typeof(Sprite), false) as Sprite;
+                    script.weaponPicture = null;
+                    script.weaponHudPicture = null;
+                    script.weaponQuickUsePicture = null;
                     script.weaponKillfeedImage = EditorGUILayout.ObjectField("Killfeed image", script.weaponKillfeedImage, typeof(Sprite), false) as Sprite;
                     //script.weaponType = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", script.weaponType); //OLD
                     EditorGUI.BeginChangeCheck();

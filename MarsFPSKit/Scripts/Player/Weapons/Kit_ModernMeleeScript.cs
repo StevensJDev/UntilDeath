@@ -579,7 +579,7 @@ namespace MarsFPSKit
                 if (primaryAttack != AttackType.None && secondaryAttack != AttackType.None)
                 {
                     WeaponDisplayData wdd = new WeaponDisplayData();
-                    wdd.sprite = weaponHudPicture;
+                    wdd.sprite = null;
                     wdd.name = weaponName;
                     return wdd;
                 }
@@ -594,7 +594,9 @@ namespace MarsFPSKit
                 if (quickAttack != AttackType.None)
                 {
                     WeaponQuickUseDisplayData wdd = new WeaponQuickUseDisplayData();
-                    wdd.sprite = weaponQuickUsePicture;
+                    if (weaponQuickUsePicture) {
+                        wdd.sprite = null;
+                    }
                     wdd.name = weaponName;
                     if (quickAttack == AttackType.Heal)
                     {

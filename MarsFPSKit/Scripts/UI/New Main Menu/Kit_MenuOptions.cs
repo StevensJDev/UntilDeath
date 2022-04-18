@@ -63,6 +63,10 @@ namespace MarsFPSKit
             /// Toggle prefab
             /// </summary>
             public GameObject optionToggle;
+            /// <summary>
+            /// Button prefab
+            /// </summary>
+            public GameObject optionButton;
 
             /// <summary>
             /// Category ID
@@ -147,6 +151,25 @@ namespace MarsFPSKit
                             Toggle toggle = option.GetComponentInChildren<Toggle>();
                             categories[id].options[od].OnToggleStart(oTxt, toggle);
                             toggle.onValueChanged.AddListener(delegate { categories[id].options[od].OnToggleChange(oTxt, toggle.isOn); });
+
+                            //Add
+                            optionsCategories[id][od] = option;
+                            //Hide
+                            option.SetActive(false);
+                        }
+                        else if (categories[i].options[o].GetOptionType() == OptionType.Button)
+                        {
+                            GameObject option = Instantiate(optionButton, optionsListGo, false);
+                            TextMeshProUGUI oTxt = option.GetComponentInChildren<TextMeshProUGUI>();
+                            oTxt.text = categories[i].options[o].GetDisplayName();
+                            EventTrigger et = option.AddComponent<EventTrigger>();
+                            EventTrigger.Entry hover = new EventTrigger.Entry();
+                            hover.eventID = EventTriggerType.PointerEnter;
+                            hover.callback.AddListener(delegate { Hover(id, od); });
+                            et.triggers.Add(hover);
+                            Button button = option.GetComponentInChildren<Button>();
+                            categories[id].options[od].OnCreate(oTxt, button);
+                            button.onClick.AddListener(delegate { categories[id].options[od].OnButtonChange(oTxt, button, "any"); });
 
                             //Add
                             optionsCategories[id][od] = option;

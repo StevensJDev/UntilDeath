@@ -6,7 +6,7 @@ namespace MarsFPSKit
 {
     namespace UI
     {
-        public enum OptionType { Slider, Dropdown, Toggle }
+        public enum OptionType { Slider, Dropdown, Toggle, Button }
 
         public abstract class Kit_OptionBase : ScriptableObject
         {
@@ -54,6 +54,16 @@ namespace MarsFPSKit
             }
 
             public virtual void OnSliderStart(TextMeshProUGUI txt, Slider slider)
+            {
+
+            }
+
+            public virtual void OnCreate(TextMeshProUGUI txt, Button button) 
+            {
+
+            }
+
+            public virtual void OnButtonChange(TextMeshProUGUI txt, Button button, string newValue) 
             {
 
             }
