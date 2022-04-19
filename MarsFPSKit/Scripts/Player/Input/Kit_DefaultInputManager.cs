@@ -35,6 +35,23 @@ namespace MarsFPSKit
         public float spottingFov = 90f;
         public float spottingRayDistance = 200f;
 
+        // Keybinding controls
+        private KeyCode left; // Not working
+        private KeyCode right; // Not working
+        private KeyCode up; // Not working
+        private KeyCode down; // Not working
+        private KeyCode crouch;
+        private KeyCode sprint;
+        private KeyCode jump;
+        private KeyCode dropWeapon;
+        private KeyCode lmb;
+        private KeyCode rmb;
+        private KeyCode reload;
+        private KeyCode switchWeapon;
+        private KeyCode flashlight;
+        private KeyCode scoreboard;
+         
+
 
         // TODO: Call when exiting the options/controls menu
         public override void InitializeControls(Kit_PlayerBehaviour pb)
@@ -44,6 +61,24 @@ namespace MarsFPSKit
             pb.input.weaponSlotUses = new bool[weaponSlotKeys.Length];
             did.enemyPlayersAwareOff = new List<Kit_PlayerBehaviour>();
             spottingBoxSize = new Vector3(spottingBoxExtents.x, spottingBoxExtents.y, spottingMaxDistance / 2f);
+
+            // Set Keybinds
+            // left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "LeftArrow"));
+            // right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "RightArrow"));
+            // up = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Forwards", "UpArrow"));
+            // down = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Backwards", "DownArrow"));
+
+            crouch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Crouch/Stand", "LeftControl"));
+            sprint = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Sprint", "LeftShift"));
+            jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space"));
+            dropWeapon = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "F"));
+            lmb = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot/Hit", "Mouse0"));
+            rmb = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Aim", "Mouse1"));
+            reload = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Reload", "R"));
+            switchWeapon = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Quick Switch", "X"));
+            flashlight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Flashlight", "Z"));
+            scoreboard = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Scoreboard", "Tab"));
+
         }
 
         public override void WriteToPlayerInput(Kit_PlayerBehaviour pb)
@@ -60,17 +95,16 @@ namespace MarsFPSKit
                 // pb.input.leanLeft = Input.GetButton("Lean Left"); // Not used
                 // pb.input.leanRight = Input.GetButton("Lean Right"); // Not used
 
-                // TODO: Simplify using data dictionary so it doesnt have to call player prefs each time.
-                pb.input.crouch = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Crouch/Stand")));
-                pb.input.sprint = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Sprint")));
-                pb.input.jump = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump")));
-                pb.input.dropWeapon = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact")));
-                pb.input.lmb = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot/Hit")));
-                pb.input.rmb = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Aim")));
-                pb.input.reload = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Reload")));
-                pb.input.switchWeapon = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Quick Switch")));
-                pb.input.flashlight = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Flashlight")));
-                pb.input.scoreboard = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Scoreboard")));
+                pb.input.crouch = Input.GetKey(crouch);
+                pb.input.sprint = Input.GetKey(sprint);
+                pb.input.jump = Input.GetKeyDown(jump);
+                pb.input.dropWeapon = Input.GetKeyDown(dropWeapon);
+                pb.input.lmb = Input.GetKey(lmb);
+                pb.input.rmb = Input.GetKey(rmb);
+                pb.input.reload = Input.GetKey(reload);
+                pb.input.switchWeapon = Input.GetKey(switchWeapon);
+                pb.input.flashlight = Input.GetKeyDown(flashlight);
+                pb.input.scoreboard = Input.GetKeyDown(scoreboard);
 
                 if (pb.input.weaponSlotUses == null || pb.input.weaponSlotUses.Length != weaponSlotKeys.Length) pb.input.weaponSlotUses = new bool[weaponSlotKeys.Length];
 
