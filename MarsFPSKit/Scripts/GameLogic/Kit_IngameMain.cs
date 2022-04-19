@@ -973,7 +973,7 @@ namespace MarsFPSKit
                 #endregion
 
                 #region Score Menu
-                if (pauseMenuState == 0 && Input.GetKeyDown(KeyCode.Tab) && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId)) {
+                if (pauseMenuState == 0 && myPlayer.input.scoreboard && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId)) {
                     isScoreboardOpen = !isScoreboardOpen;
                     if (isScoreboardOpen) {
                         SwitchMenu(scoreMenuId, true);
@@ -1654,8 +1654,6 @@ namespace MarsFPSKit
 
                 //Then go to loadout
                 OpenLoadoutMenu();
-
-                //TODO: SWITCH TO LOADOUT
             }
             else
             {

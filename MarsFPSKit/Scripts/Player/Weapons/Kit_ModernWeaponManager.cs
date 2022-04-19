@@ -633,7 +633,6 @@ namespace MarsFPSKit
                                     }
                                     else
                                     {
-                                        //TODO: Should maybe change name later to avoid confusion
                                         if (runtimeData.lastDropWeapon != pb.input.dropWeapon)
                                         {
                                             runtimeData.lastDropWeapon = pb.input.dropWeapon;

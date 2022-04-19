@@ -165,7 +165,7 @@
                 this.photonVoiceView.RecorderInUse.UserData = this.photonView.ViewID;
                 this.photonVoiceView.RecorderInUse.RestartRecording();
             }
-            else if (this.photonVoiceView.RecorderInUse.VoiceDetection && this.DisableVad) // todo: check WebRtcAudioDsp.VAD
+            else if (this.photonVoiceView.RecorderInUse.VoiceDetection && this.DisableVad)
             {
                 why = "recorder vad is enabled, disable it for testing";
                 this.photonVoiceView.RecorderInUse.VoiceDetection = false;

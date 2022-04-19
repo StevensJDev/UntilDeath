@@ -374,7 +374,6 @@ namespace Photon.Pun
                 Room room = CurrentRoom;
                 if (room != null)
                 {
-                    // TODO: implement more effectively. maybe cache?!
                     return room.Players.Values.OrderBy((x) => x.ActorNumber).ToArray();
                 }
                 return new Player[0];
@@ -391,7 +390,6 @@ namespace Photon.Pun
                 Room room = CurrentRoom;
                 if (room != null)
                 {
-                    // TODO: implement more effectively. maybe cache?!
                     return room.Players.Values.OrderBy((x) => x.ActorNumber).Where(x => !x.IsLocal).ToArray();
                 }
                 return new Player[0];
@@ -737,7 +735,7 @@ namespace Photon.Pun
                     return Environment.TickCount;
                 }
 
-                return NetworkingClient.LoadBalancingPeer.ServerTimeInMilliSeconds;   // TODO: implement ServerTimeInMilliSeconds in LBC
+                return NetworkingClient.LoadBalancingPeer.ServerTimeInMilliSeconds;
             }
         }
 
@@ -814,7 +812,7 @@ namespace Photon.Pun
                     return true;
                 }
 
-                return NetworkingClient.CurrentRoom != null && NetworkingClient.CurrentRoom.MasterClientId == LocalPlayer.ActorNumber;  // TODO: implement MasterClient shortcut in LBC?
+                return NetworkingClient.CurrentRoom != null && NetworkingClient.CurrentRoom.MasterClientId == LocalPlayer.ActorNumber;
             }
         }
 
@@ -1230,7 +1228,6 @@ namespace Photon.Pun
         /// <param name="appID">Your application ID (Photon Cloud provides you with a GUID for your game).</param>
         public static bool ConnectToMaster(string masterServerAddress, int port, string appID)
         {
-            // TODO: refactor NetworkingClient.LoadBalancingPeer.PeerState to not use the peer but LBC.connected or so
             if (NetworkingClient.LoadBalancingPeer.PeerState != PeerStateValue.Disconnected)
             {
                 Debug.LogWarning("ConnectToMaster() failed. Can only connect while in state 'Disconnected'. Current state: " + NetworkingClient.LoadBalancingPeer.PeerState);
@@ -2261,8 +2258,6 @@ namespace Photon.Pun
         /// <param name="customPropertiesToDelete">List of Custom Property keys to remove. See remarks.</param>
         public static void RemovePlayerCustomProperties(string[] customPropertiesToDelete)
         {
-            // TODO: decide if this option makes sense
-
             if (customPropertiesToDelete == null || customPropertiesToDelete.Length == 0 || LocalPlayer.CustomProperties == null)
             {
                 LocalPlayer.CustomProperties = new Hashtable();

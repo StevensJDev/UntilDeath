@@ -189,7 +189,6 @@ namespace Photon.Voice
                         return;
                     }
 
-                    //TODO: call framePool.AcquireOrCreate(frame.Length) and test
                     if (framePool.Info != frame.Length)
                     {
                         framePool.Init(frame.Length);

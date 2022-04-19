@@ -89,7 +89,6 @@ namespace Photon.Voice.MacOS
                 Photon_Audio_In_Destroy(handle);
                 handle = IntPtr.Zero;
             }
-            // TODO: Remove this from instancePerHandle
         }
     }
 }

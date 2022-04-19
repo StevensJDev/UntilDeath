@@ -389,13 +389,11 @@ namespace Photon.Pun
         {
         }
 
-        //TODO: Check if this needs to be implemented
         // in: IOptionalInfoCallbacks
         public virtual void OnWebRpcResponse(OperationResponse response)
         {
         }
 
-        //TODO: Check if this needs to be implemented
         // in: IOptionalInfoCallbacks
         public virtual void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
         {
@@ -931,13 +929,13 @@ namespace Photon.Pun
         /// <summary>compares the squared magnitude of target - second to given float value</summary>
         public static bool AlmostEquals(this Vector3 target, Vector3 second, float sqrMagnitudePrecision)
         {
-            return (target - second).sqrMagnitude < sqrMagnitudePrecision; // TODO: inline vector methods to optimize?
+            return (target - second).sqrMagnitude < sqrMagnitudePrecision;
         }
 
         /// <summary>compares the squared magnitude of target - second to given float value</summary>
         public static bool AlmostEquals(this Vector2 target, Vector2 second, float sqrMagnitudePrecision)
         {
-            return (target - second).sqrMagnitude < sqrMagnitudePrecision; // TODO: inline vector methods to optimize?
+            return (target - second).sqrMagnitude < sqrMagnitudePrecision;
         }
 
         /// <summary>compares the angle between target and second to given float value</summary>

@@ -141,8 +141,6 @@ namespace Photon.Realtime
             string[] servers = opGetRegions[ParameterCode.Address] as string[];
             if (regions == null || servers == null || regions.Length != servers.Length)
             {
-                //TODO: log error
-                //Debug.LogError("The region arrays from Name Server are not ok. Must be non-null and same length. " + (regions == null) + " " + (servers == null) + "\n" + opGetRegions.ToStringFull());
                 return;
             }
             
@@ -189,15 +187,11 @@ namespace Photon.Realtime
         {
             if (this.EnabledRegions == null || this.EnabledRegions.Count == 0)
             {
-                //TODO: log error
-                //Debug.LogError("No regions available. Maybe all got filtered out or the AppId is not correctly configured.");
                 return false;
             }
 
             if (this.IsPinging)
             {
-                //TODO: log warning
-                //Debug.LogWarning("PingMinimumOfRegions() skipped, because this RegionHandler is already pinging some regions.");
                 return false;
             }
 
@@ -281,8 +275,6 @@ namespace Photon.Realtime
         {
             if (this.EnabledRegions == null || this.EnabledRegions.Count == 0)
             {
-                //TODO: log
-                //Debug.LogError("No regions available. Maybe all got filtered out or the AppId is not correctly configured.");
                 return false;
             }
 
@@ -294,7 +286,7 @@ namespace Photon.Realtime
                 {
                     RegionPinger rp = new RegionPinger(region, this.OnRegionDone);
                     this.pingerList.Add(rp);
-                    rp.Start(); // TODO: check return value
+                    rp.Start();
                 }
             }
 

@@ -222,7 +222,7 @@ namespace Photon.Realtime
                 {
                     if (!this.isOffline)
                     {
-                        this.LoadBalancingClient.OpSetPropertyOfRoom(GamePropertyKey.PlayerTtl, value);  // TODO: implement Offline Mode
+                        this.LoadBalancingClient.OpSetPropertyOfRoom(GamePropertyKey.PlayerTtl, value);
                     }
                 }
 
@@ -241,7 +241,7 @@ namespace Photon.Realtime
                 {
                     if (!this.isOffline)
                     {
-                        this.LoadBalancingClient.OpSetPropertyOfRoom(GamePropertyKey.EmptyRoomTtl, value);  // TODO: implement Offline Mode
+                        this.LoadBalancingClient.OpSetPropertyOfRoom(GamePropertyKey.EmptyRoomTtl, value);
                     }
                 }
 

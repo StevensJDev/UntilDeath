@@ -36,6 +36,7 @@ namespace MarsFPSKit
         public float spottingRayDistance = 200f;
 
 
+        // TODO: Call when exiting the options/controls menu
         public override void InitializeControls(Kit_PlayerBehaviour pb)
         {
             DefaultInputData did = new DefaultInputData();
@@ -47,26 +48,29 @@ namespace MarsFPSKit
 
         public override void WriteToPlayerInput(Kit_PlayerBehaviour pb)
         {
+            // Constantly being called
             if (pb.inputManagerData != null && pb.inputManagerData.GetType() == typeof(DefaultInputData))
             {
                 DefaultInputData did = pb.inputManagerData as DefaultInputData;
                 //Get all input
                 pb.input.hor = Input.GetAxis("Horizontal");
                 pb.input.ver = Input.GetAxis("Vertical");
-                pb.input.crouch = Input.GetButton("Crouch");
-                pb.input.sprint = Input.GetButton("Sprint");
-                pb.input.jump = Input.GetKey(KeyCode.Space);
-                pb.input.dropWeapon = Input.GetKey(KeyCode.F);
-                pb.input.lmb = Input.GetMouseButton(0);
-                pb.input.rmb = Input.GetKey(KeyCode.Mouse1);
-                pb.input.reload = Input.GetKey(KeyCode.R);
-                pb.input.mouseX = Input.GetAxisRaw("Mouse X");
-                pb.input.mouseY = Input.GetAxisRaw("Mouse Y");
-                pb.input.leanLeft = Input.GetButton("Lean Left");
-                pb.input.leanRight = Input.GetButton("Lean Right");
-                pb.input.thirdPerson = Input.GetButton("Change Perspective");
-                pb.input.switchWeapon = Input.GetButtonDown("Switch");
-                pb.input.laser = Input.GetButton("Laser");
+                pb.input.mouseX = Input.GetAxisRaw("Mouse X"); // Dont change
+                pb.input.mouseY = Input.GetAxisRaw("Mouse Y"); // Dont change
+                // pb.input.leanLeft = Input.GetButton("Lean Left"); // Not used
+                // pb.input.leanRight = Input.GetButton("Lean Right"); // Not used
+
+                // TODO: Simplify using data dictionary so it doesnt have to call player prefs each time.
+                pb.input.crouch = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Crouch/Stand")));
+                pb.input.sprint = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Sprint")));
+                pb.input.jump = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump")));
+                pb.input.dropWeapon = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact")));
+                pb.input.lmb = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot/Hit")));
+                pb.input.rmb = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Aim")));
+                pb.input.reload = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Reload")));
+                pb.input.switchWeapon = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Quick Switch")));
+                pb.input.flashlight = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Flashlight")));
+                pb.input.scoreboard = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Scoreboard")));
 
                 if (pb.input.weaponSlotUses == null || pb.input.weaponSlotUses.Length != weaponSlotKeys.Length) pb.input.weaponSlotUses = new bool[weaponSlotKeys.Length];
 

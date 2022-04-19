@@ -100,7 +100,6 @@ namespace MarsFPSKit
                 levelUpText.text = "New item unlocked: " + unlockedItems[i].name;
                 //Set image
                 levelUpImage.sprite = unlockedItems[i].img;
-                //TODO
                 animationFade.Play("Fade");
                 //Wait
                 yield return new WaitForSeconds(animationLength);

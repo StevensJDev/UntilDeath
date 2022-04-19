@@ -56,7 +56,7 @@ namespace Photon.Voice
     /// </summary>
     public class LocalVoice : IDisposable
     {
-        public const int DATA_POOL_CAPACITY = 50; // TODO: may depend on data type and properties, set for average audio stream
+        public const int DATA_POOL_CAPACITY = 50;
 
         [Obsolete("Use InterestGroup.")]
         public byte Group { get { return InterestGroup; } set { InterestGroup = value; } }

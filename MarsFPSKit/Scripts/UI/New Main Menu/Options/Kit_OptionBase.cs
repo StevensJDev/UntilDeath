@@ -63,7 +63,7 @@ namespace MarsFPSKit
 
             }
 
-            public virtual void OnButtonChange(TextMeshProUGUI txt, Button button, string newValue) 
+            public virtual void OnButtonChange(TextMeshProUGUI txt, Button button) 
             {
 
             }

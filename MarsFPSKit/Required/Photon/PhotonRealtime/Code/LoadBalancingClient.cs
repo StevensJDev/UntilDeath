@@ -774,7 +774,7 @@ namespace Photon.Realtime
             this.LoadBalancingPeer = new LoadBalancingPeer(this, protocol);
             this.LoadBalancingPeer.OnDisconnectMessage += this.OnDisconnectMessageReceived;
             this.SerializationProtocol = SerializationProtocol.GpBinaryV18;
-            this.LocalPlayer = this.CreatePlayer(string.Empty, -1, true, null); //TODO: Check if we can do this later
+            this.LocalPlayer = this.CreatePlayer(string.Empty, -1, true, null);
 
 
             #if SUPPORTED_UNITY
@@ -928,7 +928,7 @@ namespace Photon.Realtime
             else
             {
                 this.Server = ServerConnection.MasterServer;
-                int portToUse = appSettings.IsDefaultPort ? 5055 : appSettings.Port;    // TODO: setup new (default) port config
+                int portToUse = appSettings.IsDefaultPort ? 5055 : appSettings.Port;   
                 this.MasterServerAddress = string.Format("{0}:{1}", appSettings.Server, portToUse);
 
                 if (!this.LoadBalancingPeer.Connect(this.MasterServerAddress, this.ProxyServerAddress, this.AppId, this.TokenForInit))
@@ -1136,8 +1136,6 @@ namespace Photon.Realtime
         /// </summary>
         private bool Connect(string serverAddress, string proxyServerAddress, ServerConnection serverType)
         {
-            // TODO: Make sure app doesn't quit right now
-
             if (this.State == ClientState.Disconnecting)
             {
                 this.DebugReturn(DebugLevel.ERROR, "Connect() failed. Can't connect while disconnecting (still). Current state: " + this.State);
@@ -2906,7 +2904,6 @@ namespace Photon.Realtime
 
                     //if (onlineList == null || roomList == null || this.friendListRequested == null || onlineList.Length != this.friendListRequested.Length)
                     //{
-                    //    // TODO: Check if we should handle this case better / more extensively
                     //    this.DebugReturn(DebugLevel.ERROR, "OpFindFriends failed. Some list is not set. OpResponse: " + operationResponse.ToStringFull());
                     //    this.friendListRequested = null;
                     //    this.isFetchingFriendList = false;
@@ -3977,7 +3974,6 @@ namespace Photon.Realtime
         ///            {
         ///                switch (webRpcResponse.Name)
         ///                {
-        ///                    // todo: add your code here
         ///                 case GetGameListWebRpcMethodName: // example
         ///                    // ...
         ///                    break;

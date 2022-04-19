@@ -282,7 +282,7 @@ namespace Photon.Voice.Unity
                 {
                     this.globalRecordersLogLevel = value;
                     #if UNITY_EDITOR
-                    Recorder[] recorders = FindObjectsOfType<Recorder>(); // todo: get rid of this ugliness
+                    Recorder[] recorders = FindObjectsOfType<Recorder>();
                     for (int i = 0; i < recorders.Length; i++)
                     {
                         if (!recorders[i].IgnoreGlobalLogLevel)

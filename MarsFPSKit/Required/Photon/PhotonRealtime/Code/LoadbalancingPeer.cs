@@ -819,8 +819,7 @@ namespace Photon.Realtime
 
             if (encryptionMode == EncryptionMode.DatagramEncryption && expectedProtocol != ConnectionProtocol.Udp)
             {
-                // TODO disconnect?!
-                throw new NotSupportedException("Expected protocol set to UDP, due to encryption mode DatagramEncryption.");    // TODO use some other form of callback?!
+                throw new NotSupportedException("Expected protocol set to UDP, due to encryption mode DatagramEncryption.");
             }
 
             opParameters[ParameterCode.ExpectedProtocol] = (byte)expectedProtocol;

@@ -274,8 +274,7 @@ namespace Photon.Pun
         [SerializeField]
         [FormerlySerializedAs("viewIdField")]
         [HideInInspector]
-        public int sceneViewId = 0; // TODO: in best case, this is not public
-
+        public int sceneViewId = 0;
 
         /// This field is the "runtime" ViewID as backup for the property.
         [NonSerialized]
@@ -294,7 +293,6 @@ namespace Photon.Pun
 
             set
             {
-                // TODO: Check if the isPlaying check is needed when the PhotonViewHandler is updated
                 if (value != 0 && this.viewIdField != 0)
                 {
                     Debug.LogWarning("Changing a ViewID while it's in use is not possible (except setting it to 0 (not being used). Current ViewID: " + this.viewIdField);
@@ -354,7 +352,6 @@ namespace Photon.Pun
         internal void ResetPhotonView(bool resetOwner)
         {
             //// If this was fired by this connection rejoining, reset the ownership cache to owner = creator.
-            //// TODO: This reset may not be needed at all with the ownership being invalidated next.
             //if (resetOwner)
             //    ResetOwnership();
 

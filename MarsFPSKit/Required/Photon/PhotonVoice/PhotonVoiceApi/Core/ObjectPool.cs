@@ -86,7 +86,6 @@ namespace Photon.Voice
         /// <param name="info">Info structure to match, or create a new object with.</param>
         public TType AcquireOrCreate(TInfo info)
         {
-            // TODO: this.info thread safety
             if (!infosMatch(this.info, info))
             {
                 Init(info);
@@ -100,7 +99,6 @@ namespace Photon.Voice
         /// <remarks>obj is returned to the pool only if objInfo matches this pool's info. Else, it is destroyed.</remarks>
         virtual public bool Release(TType obj, TInfo objInfo)
         {
-            // TODO: this.info thread safety
             if (infosMatch(this.info, objInfo))
             {
                 lock (this)
@@ -116,7 +114,6 @@ namespace Photon.Voice
             // destroy if can't reuse
             //UnityEngine.Debug.Log(LogPrefix + " Release(Info) destroy");
             destroyObject(obj);
-            // TODO: log warning
             return false;
         }
 
@@ -136,7 +133,6 @@ namespace Photon.Voice
             // destroy if can't reuse
             //UnityEngine.Debug.Log(LogPrefix + " Release destroy " + pos);
             destroyObject(obj);
-            // TODO: log warning
             return false;
         }
 

@@ -1534,8 +1534,6 @@ namespace Photon.Chat
 
         private void HandleUserSubscribedEvent(EventData eventData)
         {
-            //TODO: Handle user properties!
-
             string channelName = eventData.Parameters[ChatParameterCode.Channel] as string;
             string userId = eventData.Parameters[ChatParameterCode.UserId] as string;
             ChatChannel channel;

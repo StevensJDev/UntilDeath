@@ -266,16 +266,12 @@ namespace Photon.Realtime
                         byte[] resultBytes = new byte[receivedByteCount];
                         reader.ReadBytes(resultBytes);
 
-                        //TODO: check result bytes!
-
-
                         this.Successful = receivedByteCount == this.PingLength && resultBytes[resultBytes.Length - 1] == this.PingId;
                         this.GotResult = true;
                     }
                 }
                 catch
                 {
-                    // TODO: handle error
                 }
             }
         }

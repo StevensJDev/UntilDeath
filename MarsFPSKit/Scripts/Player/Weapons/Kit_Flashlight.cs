@@ -8,6 +8,7 @@ namespace MarsFPSKit
     /// </summary>
     public class Kit_Flashlight : MonoBehaviour
     {
+        private Kit_PlayerBehaviour pb;
         /// <summary>
         /// Light used for Third Person flashlight
         /// </summary>
@@ -18,9 +19,18 @@ namespace MarsFPSKit
         /// </summary>
         private bool isFlashlightEnabled;
 
+        void Start() 
+        {
+            pb = this.GetComponentInParent<Kit_PlayerBehaviour>();
+        }
+
         void Update()
         {
-            if (Input.GetButtonDown("Flashlight")) {
+            UseFlashlight();
+        }
+
+        void UseFlashlight() {
+            if (pb.input.flashlight) {
                 isFlashlightEnabled = !isFlashlightEnabled;
             }
 

@@ -169,7 +169,7 @@ namespace MarsFPSKit
                             et.triggers.Add(hover);
                             Button button = option.GetComponentInChildren<Button>();
                             categories[id].options[od].OnCreate(oTxt, button);
-                            button.onClick.AddListener(delegate { categories[id].options[od].OnButtonChange(oTxt, button, "any"); });
+                            button.onClick.AddListener(delegate { categories[id].options[od].OnButtonChange(oTxt, button); });
 
                             //Add
                             optionsCategories[id][od] = option;

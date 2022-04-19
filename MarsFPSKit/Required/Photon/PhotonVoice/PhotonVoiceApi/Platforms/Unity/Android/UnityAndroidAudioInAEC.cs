@@ -20,7 +20,6 @@ namespace Photon.Voice.Unity
             {
                 if (callback != null)
                 {
-                    //TODO: copy to LocalVoiceFramed.PushDataBufferPool element instead
                     var buf = AndroidJNI.FromShortArray(javaBuf);
                     cntFrame++;
                     cntShort += buf.Length;

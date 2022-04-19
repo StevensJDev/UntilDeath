@@ -28,6 +28,7 @@ namespace MarsFPSKit
         public bool leanRight;
         public bool thirdPerson;
         public bool switchWeapon;
+        public bool scoreboard;
         public bool flashlight;
         public bool laser;
         public bool[] weaponSlotUses;

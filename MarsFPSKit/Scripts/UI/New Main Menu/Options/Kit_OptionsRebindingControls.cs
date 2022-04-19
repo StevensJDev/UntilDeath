@@ -11,68 +11,8 @@ namespace MarsFPSKit
         public class Kit_OptionsRebindingControls : Kit_OptionBase
         {
             [SerializeField] public string rebindType = "";
-            // [SerializeField] private InputActionReference jumpAction = null;
-            // [SerializeField] private PlayerController playerController = null;
-            // [SerializeField] private TMP_Text bindingDisplayNameText = null;
-            // [SerializeField] private GameObject startRebindObject = null;
-            // [SerializeField] private GameObject waitingForInputObject = null;
 
-            // private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-
-            private const string RebindsKey = "rebinds";
-
-            // private void Start()
-            // {
-            //     Debug.Log("Button Start");
-            //     // string rebinds = PlayerPrefsExtended.GetString(RebindsKey, string.Empty);
-
-            //     // if (string.IsNullOrEmpty(rebinds)) { return; }
-
-            //     // playerController.PlayerInput.actions.LoadBindingOverridesFromJson(rebinds);
-
-            //     // int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
-
-            //     // bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            //     //     jumpAction.action.bindings[bindingIndex].effectivePath,
-            //     //     InputControlPath.HumanReadableStringOptions.OmitDevice);
-            // }
-
-            // public void Save()
-            // {
-            //     // string rebinds = playerController.PlayerInput.actions.SaveBindingOverridesAsJson();
-
-            //     // PlayerPrefs.SetString(RebindsKey, rebinds);
-            // }
-
-            // public void StartRebinding()
-            // {
-            //     // startRebindObject.SetActive(false);
-            //     // waitingForInputObject.SetActive(true);
-
-            //     // playerController.PlayerInput.SwitchCurrentActionMap("Menu");
-
-            //     // rebindingOperation = jumpAction.action.PerformInteractiveRebinding()
-            //     //     .WithControlsExcluding("Mouse")
-            //     //     .OnMatchWaitForAnother(0.1f)
-            //     //     .OnComplete(operation => RebindComplete())
-            //     //     .Start();
-            // }
-
-            // private void RebindComplete()
-            // {
-            //     // int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
-
-            //     // bindingDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            //     //     jumpAction.action.bindings[bindingIndex].effectivePath,
-            //     //     InputControlPath.HumanReadableStringOptions.OmitDevice);
-
-            //     // rebindingOperation.Dispose();
-
-            //     // startRebindObject.SetActive(true);
-            //     // waitingForInputObject.SetActive(false);
-
-            //     // playerController.PlayerInput.SwitchCurrentActionMap("Gameplay");
-            // }
+            private Kit_OptionsButtonScript buttonScript;
 
             public override string GetDisplayName()
             {
@@ -91,18 +31,14 @@ namespace MarsFPSKit
 
             public override void OnCreate(TextMeshProUGUI txt, Button button)
             {
-                Debug.Log("Button created");
-                // bool value = PlayerPrefsExtended.GetString("aimingToggle", false);
-
-                // toggle.isOn = value;
-                // OnToggleChange(txt, value);
+                buttonScript = button.GetComponent<Kit_OptionsButtonScript>();
+                TextMeshProUGUI bTxt = button.GetComponentInChildren<TextMeshProUGUI>();
+                bTxt.text = PlayerPrefs.GetString(rebindType, "Undefined");
             }
 
-            public override void OnButtonChange(TextMeshProUGUI txt, Button button, string newValue)
+            public override void OnButtonChange(TextMeshProUGUI txt, Button button)
             {
-                Debug.Log("Button Pushed");
-                // Kit_GameSettings.isAimingToggle = newValue;
-                // PlayerPrefsExtended.SetString("aimingToggle", newValue);
+                buttonScript.StartRebinding(rebindType);
             }
         }
     }

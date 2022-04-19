@@ -395,7 +395,6 @@ namespace MarsFPSKit
             //End countdown is over, start new game
             else if (main.gameModeStage == 3)
             {
-                //TODO: Load new map / game mode
                 main.gameModeStage = 4;
 
                 //Lets load the appropriate map

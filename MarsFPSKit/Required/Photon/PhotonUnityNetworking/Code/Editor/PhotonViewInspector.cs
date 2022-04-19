@@ -166,7 +166,7 @@ namespace Photon.Pun
             // Cleanup: save and fix look
             if (GUI.changed)
             {
-                PhotonViewHandler.OnHierarchyChanged(); // TODO: check if needed
+                PhotonViewHandler.OnHierarchyChanged();
             }
 
             EditorGUI.EndDisabledGroup();

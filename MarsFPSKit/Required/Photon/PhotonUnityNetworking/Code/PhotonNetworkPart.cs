@@ -282,7 +282,6 @@ namespace Photon.Pun
         /// <summary>
         /// Cleans up anything that was instantiated in-game (not loaded with the scene). Resets views that are not destroyed.
         /// </summary>
-        // TODO: This method name no longer matches is function. It also resets room object's views.
         internal static void LocalCleanupAnythingInstantiated(bool destroyInstantiatedGameObjects)
         {
             //if (tempInstantiationData.Count > 0)
@@ -824,7 +823,6 @@ namespace Photon.Pun
                     continue;
                 }
 
-                // TODO: Probably should have a enum that defines when auto-detachment should occur.
                 // Check nested PVs for different creator. Detach if different, to avoid destroying reparanted objects.
                 if (j != 0)
                 {
@@ -1063,7 +1061,7 @@ namespace Photon.Pun
             opParameters[ParameterCode.Code] = (byte)0;		// any event
             opParameters[ParameterCode.Cache] = (byte)EventCaching.RemoveFromRoomCacheForActorsLeft;    // option to clear the room cache of all events of players who left
 
-            NetworkingClient.LoadBalancingPeer.SendOperation((byte)OperationCode.RaiseEvent, opParameters, SendOptions.SendReliable);   // TODO: Check if this is the best implementation possible
+            NetworkingClient.LoadBalancingPeer.SendOperation((byte)OperationCode.RaiseEvent, opParameters, SendOptions.SendReliable);
         }
 
         // Remove RPCs of view (if they are local player's RPCs)
@@ -1166,10 +1164,8 @@ namespace Photon.Pun
         /// <param name="prefix">Max value is short.MaxValue = 255</param>
         public static void SetLevelPrefix(byte prefix)
         {
-            // TODO: check can use network
 
             currentLevelPrefix = prefix;
-            // TODO: should we really change the prefix for existing PVs?! better keep it!
             //foreach (PhotonView view in photonViewList.Values)
             //{
             //    view.prefix = prefix;
@@ -1342,8 +1338,6 @@ namespace Photon.Pun
         /// <param name="enableGroups">The interest groups to enable (or null).</param>
         public static void SetInterestGroups(byte[] disableGroups, byte[] enableGroups)
         {
-            // TODO: check can use network
-
             if (disableGroups != null)
             {
                 if (disableGroups.Length == 0)
@@ -1417,8 +1411,6 @@ namespace Photon.Pun
         /// <param name="enabled">Sets if sending to group is enabled (or not).</param>
         public static void SetSendingEnabled(byte group, bool enabled)
         {
-            // TODO: check can use network
-
             if (!enabled)
             {
                 blockedSendingGroups.Add(group); // can be added to HashSet no matter if already in it
@@ -1442,8 +1434,6 @@ namespace Photon.Pun
         /// <param name="disableGroups">The interest groups to disable sending on (or null).</param>
         public static void SetSendingEnabled(byte[] disableGroups, byte[] enableGroups)
         {
-            // TODO: check can use network
-
             if (disableGroups != null)
             {
                 for (int index = 0; index < disableGroups.Length; index++)
@@ -1752,14 +1742,14 @@ namespace Photon.Pun
                     }
 
                     view.mixedModeIsReliable = true;
-                    List<object> temp = view.lastOnSerializeDataSent;   // TODO: extract "exchange" into method in PV
+                    List<object> temp = view.lastOnSerializeDataSent;
                     view.lastOnSerializeDataSent = currentValues;
                     view.syncValues = temp;
                 }
                 else
                 {
                     view.mixedModeIsReliable = false;
-                    List<object> temp = view.lastOnSerializeDataSent;   // TODO: extract "exchange" into method in PV
+                    List<object> temp = view.lastOnSerializeDataSent;
                     view.lastOnSerializeDataSent = currentValues;
                     view.syncValues = temp;
                 }
@@ -1770,14 +1760,12 @@ namespace Photon.Pun
 
             if (view.Synchronization == ViewSynchronization.ReliableDeltaCompressed)
             {
-                // TODO: fix delta compression / comparison
-
                 // compress content of data set (by comparing to view.lastOnSerializeDataSent)
                 // the "original" dataArray is NOT modified by DeltaCompressionWrite
                 List<object> dataToSend = DeltaCompressionWrite(view.lastOnSerializeDataSent, currentValues);
 
                 // cache the values that were written this time (not the compressed values)
-                List<object> temp = view.lastOnSerializeDataSent;   // TODO: extract "exchange" into method in PV
+                List<object> temp = view.lastOnSerializeDataSent;
                 view.lastOnSerializeDataSent = currentValues;
                 view.syncValues = temp;
 
@@ -1841,9 +1829,7 @@ namespace Photon.Pun
                 data = uncompressed;
             }
 
-            // TODO: re-check if ownership needs to be adjusted based on updates.
             // most likely, only the PhotonView.Controller should be affected, if anything at all.
-            // TODO: find a way to sync the owner of a PV for late joiners.
 
             //// This is when joining late to assign ownership to the sender
             //// this has nothing to do with reading the actual synchronization update.
