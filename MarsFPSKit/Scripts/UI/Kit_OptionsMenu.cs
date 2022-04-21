@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO, might need to add all the keybinds here as well
 namespace MarsFPSKit
 {
     public class Kit_OptionsMenu : MonoBehaviour
@@ -109,6 +110,10 @@ namespace MarsFPSKit
         /// Controls whether crouching is toggle or hold
         /// </summary>
         public Toggle controlsCrouchToggle;
+        /// <summary>
+        /// Controls whether crouching is toggle or hold
+        /// </summary>
+        public Toggle controlsFPSCounter;
 
         public List<Button> keyButtons;
 
@@ -121,6 +126,7 @@ namespace MarsFPSKit
         /// Gameplay field of view texxt
         /// </summary>
         public Text gameplayFieldOfViewText;
+        public Toggle gameplayGhostCounter;
 
         void Start()
         {
@@ -166,7 +172,8 @@ namespace MarsFPSKit
             controlsCrouchToggle.onValueChanged.AddListener(delegate { ControlsCrouchingToggleChanged(controlsCrouchToggle.isOn); });
 
             gameplayFieldOfView.onValueChanged.AddListener(delegate { GameplayFieldOfViewChanged(gameplayFieldOfView.value); });
-
+            controlsFPSCounter.onValueChanged.AddListener(delegate { FPSCounterToggleChanged(controlsFPSCounter.isOn); });
+            gameplayGhostCounter.onValueChanged.AddListener(delegate { GhostCounterToggleChanged(gameplayGhostCounter.isOn); });
             //Load
             Load();
         }
@@ -344,6 +351,18 @@ namespace MarsFPSKit
             Save();
         }
 
+        private void FPSCounterToggleChanged(bool value)
+        {
+            Kit_GameSettings.isFPSCounter = value;
+            Save();
+        }
+
+        private void GhostCounterToggleChanged(bool value)
+        {
+            Kit_GameSettings.isGhostCounter = value;
+            Save();
+        }
+
         private void ControlsCrouchingToggleChanged(bool value)
         {
             Kit_GameSettings.isCrouchToggle = value;
@@ -423,6 +442,8 @@ namespace MarsFPSKit
             controlsCrouchToggle.isOn = PlayerPrefsExtended.GetBool("optionsCrouchToggle", true);
 
             gameplayFieldOfView.value = PlayerPrefs.GetFloat("optionsFieldOfView", 60f);
+            PlayerPrefsExtended.GetBool("optionsFPSCounter", false);
+            PlayerPrefsExtended.GetBool("optionsGhostCounter", false);
 
             loadDone = true;
         }
@@ -458,6 +479,8 @@ namespace MarsFPSKit
                 PlayerPrefs.SetFloat("optionsAimSensitivity", Kit_GameSettings.aimSensitivity);
                 PlayerPrefs.SetFloat("optionsScopeSensitivity", Kit_GameSettings.fullScreenAimSensitivity);
                 PlayerPrefsExtended.SetBool("optionsAimingToggle", Kit_GameSettings.isAimingToggle);
+                PlayerPrefsExtended.SetBool("optionsFPSCounter", Kit_GameSettings.isFPSCounter);
+                PlayerPrefsExtended.SetBool("optionsGhostCounter", Kit_GameSettings.isGhostCounter);
                 PlayerPrefsExtended.SetBool("optionsCrouchToggle", Kit_GameSettings.isCrouchToggle);
                 PlayerPrefs.SetFloat("optionsFieldOfView", Kit_GameSettings.baseFov);
             }

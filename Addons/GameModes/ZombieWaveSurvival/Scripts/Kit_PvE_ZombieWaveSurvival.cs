@@ -50,7 +50,7 @@ namespace MarsFPSKit
             /// <summary>
             /// Runtime assigned wave manager for callbacks
             /// </summary>
-            private Kit_PvE_ZombieWaveSurvival_WaveManager waveManager;
+            public Kit_PvE_ZombieWaveSurvival_WaveManager waveManager;
 
             /// <summary>
             /// Local player's data

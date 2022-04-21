@@ -18,6 +18,16 @@
         public static bool isAimingToggle = true;
 
         /// <summary>
+        /// Should there be an fps counter?
+        /// </summary>
+        public static bool isFPSCounter = false;
+
+        /// <summary>
+        /// Should there be a ghost counter?
+        /// </summary>
+        public static bool isGhostCounter = false;
+
+        /// <summary>
         /// Should crouching be hold or toggle?
         /// </summary>
         public static bool isCrouchToggle = true;

@@ -340,12 +340,20 @@ namespace MarsFPSKit
 
         void Update()
         {
-            // Set FPS Counter
-            if (Time.unscaledTime > timer)
-            {
-                int currentFPS = (int)(1f / Time.unscaledDeltaTime);
-                fpsCounter.text = currentFPS.ToString();
-                timer = Time.unscaledTime + hudRefreshRate;
+            if (Kit_GameSettings.isFPSCounter && !fpsCounter.gameObject.activeSelf) {
+                fpsCounter.gameObject.SetActive(true);
+            } else if (!Kit_GameSettings.isFPSCounter && fpsCounter.gameObject.activeSelf) {
+                fpsCounter.gameObject.SetActive(false);
+            }
+
+            if (fpsCounter.gameObject.activeSelf) {
+                // Set FPS Counter
+                if (Time.unscaledTime > timer)
+                {
+                    int currentFPS = (int)(1f / Time.unscaledDeltaTime);
+                    fpsCounter.text = currentFPS.ToString();
+                    timer = Time.unscaledTime + hudRefreshRate;
+                }
             }
 
             //Update hitmarker alpha

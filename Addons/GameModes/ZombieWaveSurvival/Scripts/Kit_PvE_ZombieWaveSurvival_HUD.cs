@@ -95,6 +95,8 @@ namespace MarsFPSKit
             /// </summary>
             public float moneyNewLifeTime = 2f;
 
+            public TextMeshProUGUI ghostsleft;
+
             /// <summary>
             /// Root for game over screen
             /// </summary>
@@ -123,6 +125,13 @@ namespace MarsFPSKit
 
             public override void HUDUpdate(Kit_IngameMain main)
             {
+                if (Kit_GameSettings.isGhostCounter) {
+                    ghostsleft.gameObject.SetActive(true);
+                } else {
+                    ghostsleft.gameObject.SetActive(false);
+                }
+
+                ghostsleft.text = "Ghosts Left: " + (zws.waveManager.zombiesLeftToSpawn + zws.waveManager.zombiesAlive).ToString();
                 //Enable/disable hud
                 playerAliveRoot.SetActiveOptimized(main.myPlayer);
                 //Enable/disable game over screern
@@ -214,7 +223,7 @@ namespace MarsFPSKit
                 //Set text
                 newWaveRoundNumber.text = "Round #" + round.ToString();
                 //Set Round number text
-                roundNumber.text = round.ToString(); // should probably change to be animation
+                roundNumber.text = round.ToString(); // TODO should probably change to be animation
                 //Activate
                 newWaveRoot.SetActive(true);
                 //Play animation
