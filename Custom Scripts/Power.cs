@@ -33,7 +33,7 @@ namespace MarsFPSKit
                     interactionText = "Power is already on.";
                     return false;
                 } else {
-                    interactionText = "Press [F] to turn on power.";
+                    interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to turn on power.";
                     return true;
                 }
             }

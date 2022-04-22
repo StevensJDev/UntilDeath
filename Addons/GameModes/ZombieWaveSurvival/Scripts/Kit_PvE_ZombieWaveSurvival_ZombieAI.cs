@@ -32,7 +32,7 @@ namespace MarsFPSKit
             /// Renderer
             /// </summary>
             public Kit_PvE_ZombieWaveSurvival_ZombieAIRenderer activeRenderer;
-
+            private Kit_PvE_ZombiesSoulBox soulBox;
 
             #region Runtime
             /// <summary>
@@ -493,6 +493,10 @@ namespace MarsFPSKit
                         }
                     }
 
+                    if (soulBox != null) {
+                        soulBox.addSoul();
+                    }
+
                     zws.ZombieKilled();
 
                     if (activeRenderer.anim)
@@ -556,6 +560,7 @@ namespace MarsFPSKit
                 }
             }
 
+            // Trigger is only being called while attacking.
             private void OnTriggerEnter(Collider collider)
             {
                 Kit_PvE_ZombieWaveSurvival_ZombieDamageable damageable = collider.GetComponentInParent<Kit_PvE_ZombieWaveSurvival_ZombieDamageable>();
@@ -566,6 +571,12 @@ namespace MarsFPSKit
                     {
                         activeDamageable = damageable;
                     }
+                }
+                
+                Kit_PvE_ZombiesSoulBox box = collider.GetComponent<Kit_PvE_ZombiesSoulBox>();
+
+                if (box != null) {
+                    soulBox = collider.GetComponent<Kit_PvE_ZombiesSoulBox>();
                 }
 
                 if (photonView.IsMine)
@@ -579,6 +590,12 @@ namespace MarsFPSKit
                             photonView.RPC("RpcPlayAnimationTrigger", RpcTarget.All, animTrigger.animationToTrigger, animTrigger.animationLength, animTrigger.transform.TransformDirection(animTrigger.lookDirection));
                         }
                     }
+                }
+            }
+
+            private void OnTriggerExit(Collider collider) {
+                if (collider.GetComponent<Kit_PvE_ZombiesSoulBox>() != null) {
+                    soulBox = null;
                 }
             }
             #endregion

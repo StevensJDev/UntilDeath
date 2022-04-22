@@ -6,7 +6,7 @@ namespace MarsFPSKit
 {
     namespace ZombieWaveSurvival
     {
-        public class MysteryBox : Kit_InteractableObject
+        public class TrapLever : Kit_InteractableObject
         {
             /// <summary>
             /// Rerefence to zws
@@ -23,7 +23,7 @@ namespace MarsFPSKit
             /// <summary>
             /// How much does mystery box cost?
             /// </summary>
-            public int mysteryBoxPrice;
+            public int trapPrice;
 
 
             private void Start()
@@ -39,16 +39,16 @@ namespace MarsFPSKit
                     return false;
                 }
 
-                interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] for a random weapon [$" + mysteryBoxPrice + "]";
+                interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to activate trap [$" + trapPrice + "]";
                 return true;
             }
 
             public override void Interact(Kit_PlayerBehaviour who)
             {
-                if (zws.localPlayerData.money >= mysteryBoxPrice)
+                if (zws.localPlayerData.money >= trapPrice)
                 {
                     if (power.powerIsOn) {
-                        zws.localPlayerData.SpendMoney(mysteryBoxPrice);
+                        zws.localPlayerData.SpendMoney(trapPrice);
                         // Select random weapon
                     }
                 }

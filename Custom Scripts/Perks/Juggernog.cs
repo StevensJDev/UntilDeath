@@ -41,7 +41,7 @@ namespace MarsFPSKit
                     interactionText = "You already have this perk.";
                     return false;
                 } else {
-                    interactionText = "Press [F] to buy Juggernog [$" + juggernogPrice + "]";
+                    interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to buy Juggernog [$" + juggernogPrice + "]";
                     return true;
                 }
             }

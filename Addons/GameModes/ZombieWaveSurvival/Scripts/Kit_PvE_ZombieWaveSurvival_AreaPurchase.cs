@@ -72,7 +72,7 @@ namespace MarsFPSKit
 
             public override bool CanInteract(Kit_PlayerBehaviour who)
             {
-                interactionText = "Press [F] to unlock area [$" + areaPrice + "]";
+                interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to unlock area [$" + areaPrice + "]";
 
                 if (!isUnlocked && zws.localPlayerData.money >= areaPrice)
                 {

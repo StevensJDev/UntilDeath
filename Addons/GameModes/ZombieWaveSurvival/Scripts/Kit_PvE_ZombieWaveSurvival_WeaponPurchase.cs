@@ -63,7 +63,7 @@ namespace MarsFPSKit
                 {
                     if (!who.weaponManager.IsCurrentWeaponFull(who))
                     {
-                        interactionText = "Press [F] " + ammoText + main.gameInformation.allWeapons[weaponToBuy].weaponName + " [$" + ammoPrice + "]";
+                        interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] " + ammoText + main.gameInformation.allWeapons[weaponToBuy].weaponName + " [$" + ammoPrice + "]";
 
                         if (zws.localPlayerData.money >= ammoPrice)
                         {
@@ -77,7 +77,7 @@ namespace MarsFPSKit
                     //Check if we already have that gun equipped
                     if (main.myPlayer.weaponManager.CanBuyWeapon(main.myPlayer, weaponToBuy))
                     {
-                        interactionText = "Press [F] " + weaponText + main.gameInformation.allWeapons[weaponToBuy].weaponName + " [$" + weaponPrice + "]";
+                        interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] " + weaponText + main.gameInformation.allWeapons[weaponToBuy].weaponName + " [$" + weaponPrice + "]";
 
                         if (zws.localPlayerData.money >= weaponPrice)
                         {

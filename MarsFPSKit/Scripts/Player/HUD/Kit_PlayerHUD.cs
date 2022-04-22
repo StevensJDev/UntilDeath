@@ -831,7 +831,7 @@ namespace MarsFPSKit
                 if (weapon >= 0)
                 {
                     //Set name
-                    weaponPickupText.text = "Press [F] to pickup: " + main.gameInformation.allWeapons[weapon].weaponName;
+                    weaponPickupText.text = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to pickup: " + main.gameInformation.allWeapons[weapon].weaponName;
                 }
             }
             else

@@ -42,7 +42,7 @@ namespace MarsFPSKit
                     interactionText = "You already have this perk.";
                     return false;
                 } else {
-                    interactionText = "Press [F] to buy Double Tap [$" + doubleTapPrice + "]";
+                    interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to buy Double Tap [$" + doubleTapPrice + "]";
                     return true;
                 }
             }
