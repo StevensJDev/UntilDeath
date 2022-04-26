@@ -423,9 +423,14 @@ namespace MarsFPSKit
 
                     if (hit.collider.GetComponentInParent<IKitDamageable>() != null)
                     {
+                        if (hit.collider.gameObject.tag == "FlyingEnemy") {
+                            if (hit.collider.GetComponent<IKitDamageable>().LocalDamage(settings.damage, settings.gameGunID, settings.shotFromPosition, settings.direction, settings.ragdollForce, hit.point, settings.ownerIsBot, settings.ownerID)) {
+                                //Since we hit a player, show the hitmarker
+                                main.hud.DisplayHitmarker();
+                            }
+                        }
                         if (hit.collider.GetComponentInParent<IKitDamageable>().LocalDamage(settings.damage, settings.gameGunID, settings.shotFromPosition, settings.direction, settings.ragdollForce, hit.point, settings.ownerIsBot, settings.ownerID))
                         {
-
                             if (!settings.ownerIsBot)
                             {
                                 //Since we hit a player, show the hitmarker

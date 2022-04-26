@@ -18,24 +18,41 @@ namespace MarsFPSKit
             /// </summary>
             public Kit_IngameMain main;
             public Power power;
+            public GameObject damageObj;
             [Header("Settings")]
 
             /// <summary>
             /// How much does mystery box cost?
             /// </summary>
             public int trapPrice;
-
+            public float trapTimer = 15f;
+            private bool trapCoolingDown = false;
+            private bool trapRunning = false;
+            private bool trapReady = true;
+            public float trapCooldownTimer = 60f;
+            private float timer = 0;        
 
             private void Start()
             {
                 //Find main reference
                 main = FindObjectOfType<Kit_IngameMain>();
+                damageObj.SetActive(false);
             }
 
             public override bool CanInteract(Kit_PlayerBehaviour who)
             {
                 if (!power.powerIsOn) {
                     interactionText = "Need to turn on the power.";
+                    return false;
+                }
+
+                if (trapCoolingDown) {
+                    interactionText = "Trap cooling down.";
+                    return false;
+                }
+
+                if (trapRunning) {
+                    interactionText = "";
                     return false;
                 }
 
@@ -49,13 +66,32 @@ namespace MarsFPSKit
                 {
                     if (power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(trapPrice);
-                        // Select random weapon
+                        damageObj.SetActive(true);
+                        trapReady = false;
+                        trapRunning = true;
                     }
                 }
             }
 
-            public void randomWeaponGenerator(int weaponToBuy) {
-                
+            void Update() {
+                if (trapReady == false) {
+                    if (trapRunning && trapTimer >= timer) {
+                        timer += Time.deltaTime;
+                    } else if (trapRunning && !trapCoolingDown) {
+                        trapRunning = false;
+                        damageObj.SetActive(false);
+                        trapCoolingDown = true;
+                        timer = 0;
+                    }
+
+                    if (trapCoolingDown && trapCooldownTimer >= timer) {
+                        timer += Time.deltaTime;
+                    } else if (!trapRunning && trapCoolingDown) {
+                        trapCoolingDown = false;
+                        timer = 0;
+                        trapReady = true;
+                    }
+                }
             }
         }
     }

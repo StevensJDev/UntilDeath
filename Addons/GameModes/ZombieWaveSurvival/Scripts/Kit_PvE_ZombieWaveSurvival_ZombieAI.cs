@@ -560,7 +560,6 @@ namespace MarsFPSKit
                 }
             }
 
-            // Trigger is only being called while attacking.
             private void OnTriggerEnter(Collider collider)
             {
                 Kit_PvE_ZombieWaveSurvival_ZombieDamageable damageable = collider.GetComponentInParent<Kit_PvE_ZombieWaveSurvival_ZombieDamageable>();
@@ -570,6 +569,16 @@ namespace MarsFPSKit
                     if (damageable.IsAlive())
                     {
                         activeDamageable = damageable;
+                    }
+                }
+
+                if (collider.tag == "Damage") {
+                    if (photonView.IsMine)
+                    {
+                        ragdollForce = 0f;
+
+                        //Kill us
+                        PhotonNetwork.Destroy(gameObject);
                     }
                 }
                 
