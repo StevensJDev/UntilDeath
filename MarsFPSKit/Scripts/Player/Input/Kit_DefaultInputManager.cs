@@ -78,7 +78,6 @@ namespace MarsFPSKit
             switchWeapon = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Quick Switch", "X"));
             flashlight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Flashlight", "Z"));
             scoreboard = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Scoreboard", "Tab"));
-
         }
 
         public override void WriteToPlayerInput(Kit_PlayerBehaviour pb)
@@ -102,7 +101,7 @@ namespace MarsFPSKit
                 pb.input.lmb = Input.GetKey(lmb);
                 pb.input.rmb = Input.GetKey(rmb);
                 pb.input.reload = Input.GetKey(reload);
-                pb.input.switchWeapon = Input.GetKey(switchWeapon);
+                pb.input.switchWeapon = Input.GetKeyDown(switchWeapon);
                 pb.input.flashlight = Input.GetKeyDown(flashlight);
                 pb.input.scoreboard = Input.GetKeyDown(scoreboard);
 
