@@ -38,7 +38,8 @@ namespace MarsFPSKit
                 if (playerToAttack) {
                     float distance = Vector3.Distance (playerToAttack.gameObject.transform.position, transform.position);
                     if (distance <= distanceToPlayer) {
-                        transform.position = Vector3.MoveTowards(transform.position, playerToAttack.gameObject.transform.position, speed * Time.deltaTime);
+                        Vector3 targetPosition = new Vector3(playerToAttack.gameObject.transform.position.x, playerToAttack.gameObject.transform.position.y + 1.75f, playerToAttack.gameObject.transform.position.z);
+                        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                     }
                 } else {
                     if (main.allActivePlayers.Count > 0)

@@ -348,7 +348,7 @@ namespace MarsFPSKit
             /// </summary>
             /// <param name="pb"></param>
             /// <param name="runtimeData"></param>
-            void SelectDefaultWeapon(Kit_PlayerBehaviour pb, WeaponManagerControllerRuntimeData runtimeData)
+            public override void SelectDefaultWeapon(Kit_PlayerBehaviour pb, WeaponManagerControllerRuntimeData runtimeData)
             {
                 //Select default weapon
                 for (int i = 0; i < runtimeData.weaponsInUse.Length; i++)
@@ -450,7 +450,9 @@ namespace MarsFPSKit
                                     {
                                         if (pb.input.switchWeapon) {
                                             int id = i;
-                                            if (runtimeData.desiredWeapon[0] != id)
+                                            Debug.Log(runtimeData.weaponsInUse[0].weaponsInSlot[0].id);
+                                            Debug.Log(runtimeData.weaponsInUse[1].weaponsInSlot[0].id);
+                                            if (runtimeData.desiredWeapon[0] != id && runtimeData.weaponsInUse[0].weaponsInSlot[0].id != 0)
                                             {
                                                 if (runtimeData.weaponsInUse[id].weaponsInSlot[0].behaviour.CanBeSelected(pb, runtimeData.weaponsInUse[id].weaponsInSlot[0].runtimeData))
                                                 {
@@ -459,7 +461,7 @@ namespace MarsFPSKit
                                                     break;
                                                 }
                                             }
-                                            else
+                                            else if (runtimeData.weaponsInUse[1].weaponsInSlot[0].id != 0)
                                             {
                                                 if (runtimeData.weaponsInUse[id].weaponsInSlot[0].behaviour.CanBeSelected(pb, runtimeData.weaponsInUse[id].weaponsInSlot[0].runtimeData))
                                                 {
@@ -898,7 +900,7 @@ namespace MarsFPSKit
                         WeaponManagerControllerRuntimeData runtimeData = pb.customWeaponManagerData as WeaponManagerControllerRuntimeData;
                         if (uponDeathDrop == DeadDrop.Selected)
                         {
-                            DropWeaponDead(pb, runtimeData.currentWeapon[0], runtimeData.currentWeapon[1]);
+                            // DropWeaponDead(pb, runtimeData.currentWeapon[0], runtimeData.currentWeapon[1]);
                         }
                         else if (uponDeathDrop == DeadDrop.All)
                         {
@@ -908,7 +910,7 @@ namespace MarsFPSKit
                                 {
                                     for (int o = 0; o < runtimeData.weaponsInUse[i].weaponsInSlot.Length; o++)
                                     {
-                                        DropWeaponDead(pb, i, o);
+                                        // DropWeaponDead(pb, i, o);
                                     }
                                 }
                             }
@@ -1329,7 +1331,7 @@ namespace MarsFPSKit
                 }
             }
 
-            public void DropWeapon(Kit_PlayerBehaviour pb, int slot, int weaponInSlot)
+            public override void DropWeapon(Kit_PlayerBehaviour pb, int slot, int weaponInSlot)
             {
                 if ((pb.main.currentPvPGameModeBehaviour && pb.main.currentPvPGameModeBehaviour.CanDropWeapons(pb.main)) || (pb.main.currentPvEGameModeBehaviour && pb.main.currentPvEGameModeBehaviour.CanDropWeapons(pb.main)))
                 {
@@ -1358,7 +1360,7 @@ namespace MarsFPSKit
                                 instData[4 + i] = runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].attachments[i];
                             }
                             //Instantiate
-                            PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
+                            // PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
                         }
                         else if (runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].runtimeData != null && runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].runtimeData.GetType() == typeof(MeleeControllerRuntimeData))
                         {
@@ -1379,7 +1381,7 @@ namespace MarsFPSKit
                                 instData[4 + i] = runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].attachments[i];
                             }
                             //Instantiate
-                            PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
+                            // PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
                         }
                         else if (runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].runtimeData != null && runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].runtimeData.GetType() == typeof(GrenadeControllerRuntimeData))
                         {
@@ -1401,7 +1403,7 @@ namespace MarsFPSKit
                                 instData[4 + i] = runtimeData.weaponsInUse[slot].weaponsInSlot[weaponInSlot].attachments[i];
                             }
                             //Instantiate
-                            PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
+                            // PhotonNetwork.Instantiate(dropPrefab.name, pb.playerCameraTransform.position, pb.playerCameraTransform.rotation, 0, instData);
                         }
                     }
                 }

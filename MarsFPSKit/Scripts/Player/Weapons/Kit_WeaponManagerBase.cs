@@ -16,6 +16,8 @@ namespace MarsFPSKit
             /// <param name="pb"></param>
             public abstract void SetupManager(Kit_PlayerBehaviour pb, object[] instantiationData);
 
+            public abstract void SelectDefaultWeapon(Kit_PlayerBehaviour pb, WeaponManagerControllerRuntimeData runtimeData);
+
             /// <summary>
             /// Called when the player changed from first to third or third to first person view
             /// </summary>
@@ -34,6 +36,12 @@ namespace MarsFPSKit
             /// Called in update for the local (controlling) player
             /// </summary>
             public abstract void CustomUpdate(Kit_PlayerBehaviour pb);
+
+            /// <summary> 
+            /// Called to drop a weapon
+            /// </summary>
+            /// <param name="pb"></param>
+            public virtual void DropWeapon(Kit_PlayerBehaviour pb, int slot, int weaponInSlot) { }
 
             /// <summary>
             /// Called just before the player dies
