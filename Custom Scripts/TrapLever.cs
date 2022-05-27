@@ -19,6 +19,7 @@ namespace MarsFPSKit
             public Kit_IngameMain main;
             public Power power;
             public GameObject damageObj;
+            public GameObject otherTrap;
             [Header("Settings")]
 
             /// <summary>
@@ -46,13 +47,13 @@ namespace MarsFPSKit
                     return false;
                 }
 
-                if (trapCoolingDown) {
+                if (trapCoolingDown || otherTrap.GetComponent<TrapLever>().trapCoolingDown) {
                     interactionText = "Trap cooling down.";
                     return false;
                 }
 
-                if (trapRunning) {
-                    interactionText = "";
+                if (trapRunning || otherTrap.GetComponent<TrapLever>().trapRunning) {
+                    interactionText = "Trap running.";
                     return false;
                 }
 
@@ -64,17 +65,15 @@ namespace MarsFPSKit
             {
                 if (zws.localPlayerData.money >= trapPrice)
                 {
-                    if (power.powerIsOn) {
-                        zws.localPlayerData.SpendMoney(trapPrice);
-                        damageObj.SetActive(true);
-                        trapReady = false;
-                        trapRunning = true;
-                    }
+                    zws.localPlayerData.SpendMoney(trapPrice);
+                    damageObj.SetActive(true);
+                    trapReady = false;
+                    trapRunning = true;
                 }
             }
 
             void Update() {
-                if (trapReady == false) {
+                if (!trapReady) {
                     if (trapRunning && trapTimer >= timer) {
                         timer += Time.deltaTime;
                     } else if (trapRunning && !trapCoolingDown) {
