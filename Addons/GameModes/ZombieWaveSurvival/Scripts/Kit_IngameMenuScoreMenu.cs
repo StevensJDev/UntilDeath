@@ -35,8 +35,6 @@ namespace MarsFPSKit
 
                 int money = zws.localPlayerData.getMoney();
                 score = money.ToString();
-                // int ghosts = player.kills;
-                // kills = ghosts.ToString();
 
                 nameUI.text = Kit_GameSettings.userName;
                 scoreUI.text = "$" + score;
@@ -48,12 +46,9 @@ namespace MarsFPSKit
             private void Update()
             {
                 Kit_PvE_ZombieWaveSurvival_WaveManager waveManager = FindObjectOfType<Kit_PvE_ZombieWaveSurvival_WaveManager>();
-                // Debug.Log("Kills: " + player.kills); // Doesnt work
                 if (zws) {
                     int money = zws.localPlayerData.getMoney();
                     score = money.ToString();
-                    // int ghosts = player.kills;
-                    // kills = ghosts.ToString();
                 } else {
                     zws = main.currentPvEGameModeBehaviour as Kit_PvE_ZombieWaveSurvival;
                 }

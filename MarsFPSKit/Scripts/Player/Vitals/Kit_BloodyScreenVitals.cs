@@ -84,6 +84,7 @@ namespace MarsFPSKit
                         //Hit reactions
                         if (hitReactionEnabled)
                         {
+                            pb.weaponManager.FallDownEffect(pb, true);
                             Vector3 dir = (pb.playerCameraTransform.InverseTransformDirection(Vector3.Cross(pb.playerCameraTransform.forward, pb.transform.position - shotFrom))).normalized * hitReactionsIntensity;
                             dir *= Mathf.Clamp(dmg / 30f, 0.3f, 1f);
 
@@ -127,6 +128,7 @@ namespace MarsFPSKit
                         //Hit reactions
                         if (hitReactionEnabled)
                         {
+                            pb.weaponManager.FallDownEffect(pb, true);
                             Vector3 dir = (pb.playerCameraTransform.InverseTransformDirection(Vector3.Cross(pb.playerCameraTransform.forward, pb.transform.position - shotFrom))).normalized * hitReactionsIntensity;
                             dir *= Mathf.Clamp(dmg / 30f, 0.3f, 1f);
 
@@ -230,8 +232,7 @@ namespace MarsFPSKit
             {
                 //Reset player force
                 pb.ragdollForce = 0f;
-                //Call the die function on pb
-                pb.Die(-3);
+                GoDown(pb, "-3");
             }
         }
 

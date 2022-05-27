@@ -450,8 +450,6 @@ namespace MarsFPSKit
                                     {
                                         if (pb.input.switchWeapon) {
                                             int id = i;
-                                            Debug.Log(runtimeData.weaponsInUse[0].weaponsInSlot[0].id);
-                                            Debug.Log(runtimeData.weaponsInUse[1].weaponsInSlot[0].id);
                                             if (runtimeData.desiredWeapon[0] != id && runtimeData.weaponsInUse[0].weaponsInSlot[0].id != 0)
                                             {
                                                 if (runtimeData.weaponsInUse[id].weaponsInSlot[0].behaviour.CanBeSelected(pb, runtimeData.weaponsInUse[id].weaponsInSlot[0].runtimeData))
