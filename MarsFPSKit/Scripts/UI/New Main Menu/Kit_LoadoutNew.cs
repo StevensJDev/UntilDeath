@@ -1275,13 +1275,11 @@ namespace MarsFPSKit
         {
             if (!isSwitchingScreens)
             {
-                Debug.Log("TRUE");
                 //Start the coroutine
                 currentlySwitchingScreensTo = StartCoroutine(SwitchRoutine(newMenu));
                 //We are now switching
                 return true;
             }
-            Debug.Log("FALSE");
             //Not able to switch screens
             return false;
         }

@@ -2405,11 +2405,9 @@ namespace MarsFPSKit
 
         public void OptionsButton()
         {
-            // StartCoroutine(PauseTime(false));
             if (options)
             {
                 SwitchMenu(options.optionsScreenId);
-                // StartCoroutine(PauseTime(true));
             }
         }
         #endregion
