@@ -1275,12 +1275,13 @@ namespace MarsFPSKit
         {
             if (!isSwitchingScreens)
             {
+                Debug.Log("TRUE");
                 //Start the coroutine
                 currentlySwitchingScreensTo = StartCoroutine(SwitchRoutine(newMenu));
                 //We are now switching
                 return true;
             }
-
+            Debug.Log("FALSE");
             //Not able to switch screens
             return false;
         }
@@ -1334,7 +1335,7 @@ namespace MarsFPSKit
             //Play Animation
             subMenus[currentSubScreen].anim.Play("Fade Out", 0, 0f);
             //Wait
-            yield return new WaitForSeconds(subMenus[currentSubScreen].fadeOutLength);
+            yield return new WaitForSecondsRealtime(subMenus[currentSubScreen].fadeOutLength);
             subMenus[currentSubScreen].root.SetActive(false);
 
             //Fade in new screen
@@ -1345,7 +1346,7 @@ namespace MarsFPSKit
             //Play Animation
             subMenus[currentSubScreen].anim.Play("Fade In", 0, 0f);
             //Wait
-            yield return new WaitForSeconds(subMenus[currentSubScreen].fadeInLength);
+            yield return new WaitForSecondsRealtime(subMenus[currentSubScreen].fadeInLength);
             //Done
             isSwitchingScreens = false;
         }

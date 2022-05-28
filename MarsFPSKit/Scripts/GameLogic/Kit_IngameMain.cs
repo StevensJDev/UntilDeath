@@ -2405,11 +2405,11 @@ namespace MarsFPSKit
 
         public void OptionsButton()
         {
-            StartCoroutine(PauseTime(false));
+            // StartCoroutine(PauseTime(false));
             if (options)
             {
                 SwitchMenu(options.optionsScreenId);
-                StartCoroutine(PauseTime(true));
+                // StartCoroutine(PauseTime(true));
             }
         }
         #endregion
@@ -2648,7 +2648,7 @@ namespace MarsFPSKit
                 //Play Animation
                 menuScreens[currentScreen].anim.Play("Fade Out", 0, 0f);
                 //Wait
-                yield return new WaitForSeconds(menuScreens[currentScreen].fadeOutLength);
+                yield return new WaitForSecondsRealtime(menuScreens[currentScreen].fadeOutLength);
                 menuScreens[currentScreen].root.SetActive(false);
             }
 
@@ -2662,7 +2662,7 @@ namespace MarsFPSKit
                 //Play Animation
                 menuScreens[currentScreen].anim.Play("Fade In", 0, 0f);
                 //Wait
-                yield return new WaitForSeconds(menuScreens[currentScreen].fadeInLength);
+                yield return new WaitForSecondsRealtime(menuScreens[currentScreen].fadeInLength);
                 //Set bool
                 wasFirstScreenFadedIn = true;
             }
