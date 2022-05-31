@@ -1155,6 +1155,10 @@ namespace MarsFPSKit
 
         public override bool CanFire(Kit_PlayerBehaviour pb)
         {
+            if (pb.main.isResuming) {
+                pb.main.isResuming = false;
+                return false;
+            }
             if (pb.customMovementData != null && pb.customMovementData.GetType() == typeof(BootsOnGroundRuntimeData))
             {
                 BootsOnGroundRuntimeData bogrd = (BootsOnGroundRuntimeData)pb.customMovementData;

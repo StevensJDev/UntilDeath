@@ -84,6 +84,10 @@ namespace MarsFPSKit
         /// </summary>
         private bool isSwitchingScreens;
         /// <summary>
+        /// True if we are currently resuming
+        /// </summary>
+        public bool isResuming;
+        /// <summary>
         /// Where we are currently switching screens to
         /// </summary>
         private Coroutine currentlySwitchingScreensTo;
@@ -2331,6 +2335,7 @@ namespace MarsFPSKit
         /// </summary>
         public void ResumeButton()
         {
+            isResuming = true;
             //Check if we have spawned
             if (myPlayer)
             {
