@@ -84,6 +84,11 @@ namespace MarsFPSKit
         /// </summary>
         private bool isSwitchingScreens;
         /// <summary>
+        /// True if we are able to resume
+        /// </summary>
+        public bool canResume;
+        public float resumeTimer = .25f;
+        /// <summary>
         /// True if we are currently resuming
         /// </summary>
         public bool isResuming;
@@ -936,6 +941,24 @@ namespace MarsFPSKit
 
         void Update()
         {
+            // Resume after a short amount of time
+            if (canResume) {
+                resumeTimer -= Time.unscaledDeltaTime;
+                if (resumeTimer <= 0) {
+                    canResume = false;
+                    resumeTimer = .25f;
+
+                    //We have, just lock cursor
+                    StartCoroutine(PauseTime(false));
+                    //Close pause menu
+                    isPauseMenuOpen = false;
+                    SwitchMenu(ingameFadeId, true);
+                    pluginOnForceClose.Invoke();
+                    //Lock Cursor
+                    MarsScreen.lockCursor = true;
+                }
+            }
+
             //If we are in a room
             if (PhotonNetwork.InRoom)
             {
@@ -1025,11 +1048,7 @@ namespace MarsFPSKit
                         }
                         else
                         {
-                            StartCoroutine(PauseTime(false));
-                            SwitchMenu(ingameFadeId, true);
-                            pluginOnForceClose.Invoke();
-                            //Lock cursor
-                            MarsScreen.lockCursor = true;
+                            canResume = true;
                             //Chat callback
                             chat.PauseMenuClosed();
                         }
@@ -2339,14 +2358,7 @@ namespace MarsFPSKit
             //Check if we have spawned
             if (myPlayer)
             {
-                //We have, just lock cursor
-                StartCoroutine(PauseTime(false));
-                //Close pause menu
-                isPauseMenuOpen = false;
-                SwitchMenu(ingameFadeId, true);
-                pluginOnForceClose.Invoke();
-                //Lock Cursor
-                MarsScreen.lockCursor = true;
+                canResume = true;
             }
             else if (currentPvPGameModeBehaviour && currentPvPGameModeBehaviour.CanSpawn(this, PhotonNetwork.LocalPlayer))
             {
@@ -2360,25 +2372,9 @@ namespace MarsFPSKit
                 //We haven't, try to spawn
                 Spawn();
             }
-            else if (spectatorManager && spectatorManager.IsCurrentlySpectating(this))
-            {
-                StartCoroutine(PauseTime(false));
-                //Close pause menu
-                isPauseMenuOpen = false;
-                SwitchMenu(ingameFadeId, true);
-                pluginOnForceClose.Invoke();
-                //Lock Cursor
-                MarsScreen.lockCursor = false;
-            }
             else
             {
-                StartCoroutine(PauseTime(false));
-                //Close pause menu
-                isPauseMenuOpen = false;
-                SwitchMenu(ingameFadeId, true);
-                pluginOnForceClose.Invoke();
-                //Lock Cursor
-                MarsScreen.lockCursor = false;
+                canResume = true;
             }
         }
 
@@ -2634,9 +2630,10 @@ namespace MarsFPSKit
         private IEnumerator PauseTime(bool pauseTime)
         {
             if (pauseTime) {
-                yield return new WaitForSeconds(.25f);
+                yield return new WaitForSecondsRealtime(.25f);
                 Time.timeScale = 0f; // PAUSE GAME
             } else {
+                yield return new WaitForSecondsRealtime(.25f);
                 Time.timeScale = 1.0f; // UNPAUSE GAME
             }
         }
