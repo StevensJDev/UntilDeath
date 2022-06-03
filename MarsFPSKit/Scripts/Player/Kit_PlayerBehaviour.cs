@@ -173,6 +173,8 @@ namespace MarsFPSKit
         /// Use this to store input manager runtime data
         /// </summary>
         public object inputManagerData;
+
+        private Kit_Flashlight flashlightObject;
         #endregion
 
         //This section contains internal variables
@@ -648,6 +650,9 @@ namespace MarsFPSKit
             {
                 main.spectatorManager.PlayerWasSpawned(main, this);
             }
+
+            GameObject swimmingHands = GameObject.Find("Swimming_FP(Clone)");
+            flashlightObject = swimmingHands.transform.parent.transform.GetChild(1).transform.GetChild(1).gameObject.GetComponent<Kit_Flashlight>();
         }
 
         public override void OnEnable()
@@ -935,6 +940,9 @@ namespace MarsFPSKit
                 //Footstep callback
                 movement.CalculateFootstepsUpdate(this);
 
+                if (input.flashlight && flashlightObject != null) {
+                    flashlightObject.UseFlashlight();
+                }
             }
         }
 
