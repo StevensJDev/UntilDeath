@@ -44,6 +44,7 @@ namespace MarsFPSKit
         /// How much HP do we have left?
         /// </summary>
         public TextMeshProUGUI healthText;
+        public TextMeshProUGUI revivingText;
 
         /// <summary>
         /// Root of bullets
@@ -482,6 +483,12 @@ namespace MarsFPSKit
 
         public override void PlayerUpdate(Kit_PlayerBehaviour pb)
         {
+            if (pb.vitalsManager.canRevive()) {
+                revivingText.gameObject.SetActive(true);
+            } else {
+                revivingText.gameObject.SetActive(false);
+            }
+
             //Position damage indicator
             indicatorHelperRoot.position = pb.transform.position;
             indicatorHelperRoot.rotation = pb.transform.rotation;
