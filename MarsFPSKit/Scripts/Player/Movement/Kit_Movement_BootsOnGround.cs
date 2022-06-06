@@ -403,6 +403,22 @@ namespace MarsFPSKit
             staminaSystemEnabled = hasStamina;
         }
 
+        public override float getCrouchHeight()
+        {
+            return crouchHeight;
+        }
+
+        public override float getCrouchSpeed()
+        {
+            return crouchSpeed;
+        }
+
+        public override void updateCrouch(float uCrouchSpeed, float uCrouchHeight)
+        {
+            crouchHeight = uCrouchHeight;
+            crouchSpeed = uCrouchSpeed;
+        }
+
         public override void CalculateMovementUpdate(Kit_PlayerBehaviour pb)
         {
             if (pb.photonView.IsMine)
@@ -709,7 +725,7 @@ namespace MarsFPSKit
                                             //We are standing, crouch
                                             data.state = 1;
                                         }
-                                        else if (data.state == 1)
+                                        else if (data.state == 1  && !pb.vitalsManager.canRevive())
                                         {
                                             //We are crouching, stand up
                                             data.state = 0;
@@ -797,7 +813,7 @@ namespace MarsFPSKit
                                         }
                                     }
                                     //If we try to jump and we try to jump, stand up
-                                    else if (data.state == 1)
+                                    else if (data.state == 1 && !pb.vitalsManager.canRevive())
                                     {
                                         data.state = 0;
                                     }

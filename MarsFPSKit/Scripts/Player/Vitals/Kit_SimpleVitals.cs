@@ -275,9 +275,9 @@ namespace MarsFPSKit
         }
 
         // Function that revives player while they are down amd removes all perks after they get back up.
-        public override void Revive(Kit_PlayerBehaviour pb) {
+        public override void Revive(Kit_PlayerBehaviour pb) {}
 
-        }
+        public override bool canRevive() { return false; }
 
         public override void Setup(Kit_PlayerBehaviour pb)
         {

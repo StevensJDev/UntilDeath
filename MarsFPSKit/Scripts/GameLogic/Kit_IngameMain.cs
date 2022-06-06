@@ -943,6 +943,7 @@ namespace MarsFPSKit
         {
             // Resume after a short amount of time
             if (canResume) {
+                myPlayer.inputManager.InitializeControls(myPlayer);
                 resumeTimer -= Time.unscaledDeltaTime;
                 if (resumeTimer <= 0) {
                     canResume = false;
@@ -2435,7 +2436,6 @@ namespace MarsFPSKit
         /// <param name="open"></param>
         public void SetPauseMenuState(bool open, bool canLockCursor = true)
         {
-            Debug.Log("Called");
             if (isPauseMenuOpen != open)
             {
                 isPauseMenuOpen = open;

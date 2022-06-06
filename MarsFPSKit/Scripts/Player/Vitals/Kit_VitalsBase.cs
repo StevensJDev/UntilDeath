@@ -68,6 +68,8 @@ namespace MarsFPSKit
 
         public abstract void Revive(Kit_PlayerBehaviour pb);
 
+        public abstract bool canRevive();
+
         /// <summary>
         /// Photonview Serialize callback
         /// </summary>

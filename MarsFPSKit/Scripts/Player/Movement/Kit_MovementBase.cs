@@ -20,6 +20,12 @@ namespace MarsFPSKit
         /// <param name="pb"></param>
         public abstract void updateStamina(float uSprintSpeed, float uWalkSpeed, bool hasStamina);
 
+        public abstract float getCrouchHeight();
+
+        public abstract float getCrouchSpeed();
+
+        public abstract void updateCrouch(float uCrouchSpeed, float uCrouchHeight);
+
         /// <summary>
         /// Calculate the movement (Update)
         /// </summary>

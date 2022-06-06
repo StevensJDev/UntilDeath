@@ -161,24 +161,44 @@ namespace MarsFPSKit
         { 
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             
-            // Removes juggernog
-            runtimeData.hasJuggernog = false;
-            pb.vitalsManager.ChangeHealth(pb, 100);
-            juggernogUI.SetActive(false);
+            if (runtimeData.hasJuggernog) {
+                // Removes juggernog
+                runtimeData.hasJuggernog = false;
+                pb.vitalsManager.ChangeHealth(pb, 100);
+                juggernogUI.SetActive(false);
+            }
+            
+            if (runtimeData.hasSpeedCola) {
+                // Removes speedcola
+                runtimeData.hasSpeedCola = false;
+                speedcolaUI.SetActive(false);
+            }
+            
+            if (runtimeData.hasBunnyHop) {
+                // Removes bunnyhop
+                runtimeData.hasBunnyHop = false;
+                pb.updateJumpMax(1);
+                bunnyHopUI.SetActive(false);
+            }
+            
+            if (runtimeData.hasStaminUp) {
+                // Removes staminup
+                runtimeData.hasStaminUp = false;
+                pb.updateStamina(6f, 4f, true);
+                staminUpUI.SetActive(false);
+            }
 
-            // Removes speedcola
-            runtimeData.hasSpeedCola = false;
-            speedcolaUI.SetActive(false);
+            if (runtimeData.hasDoubleTap) {
+                // Removes doubletap
+                runtimeData.hasDoubleTap = false;
+                doubleTapUI.SetActive(false);
+            }
 
-            // Removes bunnyhop
-            runtimeData.hasBunnyHop = false;
-            pb.updateJumpMax(1);
-            bunnyHopUI.SetActive(false);
-
-            // Removes staminup
-            runtimeData.hasStaminUp = false;
-            pb.updateStamina(6f, 4f, true);
-            staminUpUI.SetActive(false);
+            if (runtimeData.hasQuickRevive) {
+                // Removes quickrevive
+                runtimeData.hasQuickRevive = false;
+                quickReviveUI.SetActive(false);
+            }
         }
     }
 }

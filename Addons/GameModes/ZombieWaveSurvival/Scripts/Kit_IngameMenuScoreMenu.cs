@@ -31,7 +31,10 @@ namespace MarsFPSKit
 
             private void Start()
             {
-                zws = main.currentPvEGameModeBehaviour as Kit_PvE_ZombieWaveSurvival;
+                main = FindObjectOfType<Kit_IngameMain>();
+                if (main) {
+                    zws = main.currentPvEGameModeBehaviour as Kit_PvE_ZombieWaveSurvival;
+                }
 
                 int money = zws.localPlayerData.getMoney();
                 score = money.ToString();

@@ -140,7 +140,7 @@ namespace MarsFPSKit
             /// How long the game displays the game over screen for us
             /// </summary>
             [Header("Game Over")]
-            public float gameOverScreenTime = 5f;
+            public float gameOverScreenTime = 18f;
             [Tooltip("All drops that can occur")]
             /// <summary>
             /// All drops that can occur
@@ -408,6 +408,8 @@ namespace MarsFPSKit
                     //Check if everyone is dead
                     if (pb.main.allActivePlayers.Count <= 0 || (pb.main.allActivePlayers.Count == 1 && pb.main.allActivePlayers[0] == pb))
                     {
+                        GameObject scoreMenu = GameObject.Find("MarsFPSKit_IngamePrefab/UI/Score Menu");
+                        scoreMenu.SetActive(true);
                         pb.main.gameInformation.statistics.Save(pb.main);
                         Debug.Log("Everyone is dead. Game over.");
                         //Set to -1
@@ -443,6 +445,8 @@ namespace MarsFPSKit
                     //Check if everyone is dead
                     if (pb.main.allActivePlayers.Count <= 0 || (pb.main.allActivePlayers.Count == 1 && pb.main.allActivePlayers[0] == pb))
                     {
+                        GameObject scoreMenu = GameObject.Find("MarsFPSKit_IngamePrefab/UI/Score Menu");
+                        scoreMenu.SetActive(true);
                         Debug.Log("Everyone is dead. Game over.");
                         //Set to -1
                         pb.main.gameModeStage = -1;
