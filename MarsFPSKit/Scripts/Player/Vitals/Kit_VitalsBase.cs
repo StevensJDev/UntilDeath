@@ -66,7 +66,7 @@ namespace MarsFPSKit
 
         public abstract void GoDown(Kit_PlayerBehaviour pb, string cause, bool botshot = false, int killer = 0, bool hqr = false);
 
-        public abstract void Revive(Kit_PlayerBehaviour pb);
+        public abstract void ReviveSP(Kit_PlayerBehaviour pb);
 
         public abstract bool canRevive();
 

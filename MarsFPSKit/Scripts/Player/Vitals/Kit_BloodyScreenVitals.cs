@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using ExitGames.Client.Photon;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using MarsFPSKit.ZombieWaveSurvival;
 
 
 namespace MarsFPSKit
@@ -262,7 +263,7 @@ namespace MarsFPSKit
             if ((int)table["gameModeType"] == 0 && pb.perksManager.playerHasQuickRevive(pb)) { 
                 ableToRevive = true;
                 // Revive player
-                Revive(pb);
+                ReviveSP(pb);
             } else if (!ableToRevive) {
                 if (botshot && (killer != 0)) {
                     pb.Die(botshot, killer, cause);
@@ -273,11 +274,7 @@ namespace MarsFPSKit
         }
 
         // Function that revives player while they are down amd removes all perks after they get back up.
-        public override void Revive(Kit_PlayerBehaviour pb) {
-            Debug.Log("Reviving player");
-
-            // Zombies should stop chasing the player
-
+        public override void ReviveSP(Kit_PlayerBehaviour pb) {
             BootsOnGroundRuntimeData data = pb.customMovementData as BootsOnGroundRuntimeData;
             originalHeight = pb.movement.getCrouchHeight();
             originalSpeed = pb.movement.getCrouchSpeed();
@@ -294,6 +291,7 @@ namespace MarsFPSKit
 
         public override void CustomUpdate(Kit_PlayerBehaviour pb)
         {
+            // Single player revive
             if (ableToRevive) {
                 // After some time revert
                 runoutTimer -= Time.deltaTime;
@@ -301,9 +299,19 @@ namespace MarsFPSKit
                     BootsOnGroundRuntimeData data = pb.customMovementData as BootsOnGroundRuntimeData;
                     data.state = 0; // Stand player
                     pb.movement.updateCrouch(originalSpeed, originalHeight);
-                    // Maybe set current HP to 100? 
+                    // Zombies should start chasing the player again
+                    Kit_PvE_ZombieWaveSurvival_ZombieAI[] zombies = FindObjectsOfType<Kit_PvE_ZombieWaveSurvival_ZombieAI>();
+                    for (int i = 0; i < zombies.Length; i++) {
+                        zombies[i].playerToAttack = pb;
+                    }
                     ableToRevive = false;
                     runoutTimer = 10f;
+                } else {
+                    // Zombies should stop chasing the player
+                    Kit_PvE_ZombieWaveSurvival_ZombieAI[] zombies = FindObjectsOfType<Kit_PvE_ZombieWaveSurvival_ZombieAI>();
+                    for (int i = 0; i < zombies.Length; i++) {
+                        zombies[i].playerToAttack = null;
+                    }
                 }
             }
 

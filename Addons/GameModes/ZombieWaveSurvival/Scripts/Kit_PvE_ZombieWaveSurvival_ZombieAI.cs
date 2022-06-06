@@ -38,7 +38,7 @@ namespace MarsFPSKit
             /// <summary>
             /// Player we are currently attacking
             /// </summary>
-            private Kit_PlayerBehaviour playerToAttack;
+            public Kit_PlayerBehaviour playerToAttack;
             /// <summary>
             /// How many hit points we have left
             /// </summary>
