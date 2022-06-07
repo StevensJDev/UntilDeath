@@ -251,6 +251,7 @@ namespace MarsFPSKit
             BloodyScreenVitalsRuntimeData vrd = pb.customVitalsData as BloodyScreenVitalsRuntimeData;
             //Set new max health
             vrd.maxHP = healthNum;
+            vrd.hitPoints = healthNum;
             //Assign it
             pb.customVitalsData = vrd;
         }
