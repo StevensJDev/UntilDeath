@@ -29,6 +29,11 @@ namespace MarsFPSKit
         public abstract void OnRound(Kit_IngameMain main, int gameRounds);
 
         /// <summary>
+        /// Called when we drink a perk
+        /// </summary>
+        public abstract void AddPerk();
+
+        /// <summary>
         /// Called when we escape the level
         /// </summary>
         public abstract void OnEscape(Kit_IngameMain main);

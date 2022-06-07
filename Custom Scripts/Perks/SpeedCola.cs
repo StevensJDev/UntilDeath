@@ -55,6 +55,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasSpeedCola(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(speedcolaPrice);
                         who.perksManager.AddSpeedCola(who);
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }

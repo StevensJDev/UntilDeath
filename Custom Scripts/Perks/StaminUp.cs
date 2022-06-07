@@ -55,6 +55,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasStaminUp(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(staminUpPrice);
                         who.perksManager.AddStaminUp(who); // Adds speed and removes stamina to player
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }

@@ -55,6 +55,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasBunnyHop(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(bunnyHopPrice);
                         who.perksManager.AddBunnyHop(who); // Adds extra jump
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }

@@ -22,7 +22,7 @@ namespace MarsFPSKit
             /// <summary>
             /// Assists
             /// </summary>
-            public TextMeshProUGUI assists;
+            public TextMeshProUGUI perks;
             /// <summary>
             /// Deaths
             /// </summary>
@@ -58,7 +58,7 @@ namespace MarsFPSKit
 
                     //Just set texts
                     kills.text = "Kills: " + kspp.kills;
-                    assists.text = "Perks:  " + kspp.assists;
+                    perks.text = "Perks:  " + kspp.perks;
                     deaths.text = "Deaths: " + kspp.deaths;
                     rounds.text = "Rounds: " + kspp.rounds;
                     highestRound.text = "Highest Round: " + kspp.highestRound;

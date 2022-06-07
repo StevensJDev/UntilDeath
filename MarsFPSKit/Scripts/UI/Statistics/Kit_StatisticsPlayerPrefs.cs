@@ -24,6 +24,8 @@ namespace MarsFPSKit
 
         public int rounds;
 
+        public int perks;
+
         public int highestRound;
 
         public int escapes;
@@ -61,6 +63,10 @@ namespace MarsFPSKit
             }
         }
 
+        public override void AddPerk() {
+            perks++;
+        }
+
         public override void OnEscape(Kit_IngameMain main)
         {
             escapes++;
@@ -73,6 +79,7 @@ namespace MarsFPSKit
             deaths = 0;
             assists = 0;
             rounds = 0;
+            perks = 0;
             highestRound = 0;
             escapes = 0;
 
@@ -81,6 +88,7 @@ namespace MarsFPSKit
             deaths = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_deaths", 0);
             assists = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_assists", 0);
             rounds = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_rounds", 0);
+            perks = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_perks", 0);
             highestRound = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_highestRound", 0);
             escapes = PlayerPrefs.GetInt(Kit_GameSettings.userName + "_escapes", 0);
         }
@@ -92,6 +100,7 @@ namespace MarsFPSKit
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_deaths", deaths);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_assists", assists);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_rounds", rounds);
+            PlayerPrefs.SetInt(Kit_GameSettings.userName + "_perks", perks);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_highestRound", highestRound);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_escapes", escapes);
         }
@@ -103,6 +112,7 @@ namespace MarsFPSKit
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_deaths", deaths);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_assists", assists);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_rounds", rounds);
+            PlayerPrefs.SetInt(Kit_GameSettings.userName + "_perks", perks);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_highestRound", highestRound);
             PlayerPrefs.SetInt(Kit_GameSettings.userName + "_escapes", escapes);
         }

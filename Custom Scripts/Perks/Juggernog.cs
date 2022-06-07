@@ -54,6 +54,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasJuggernog(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(juggernogPrice);
                         who.perksManager.AddJuggernog(who, 200); // Adds health by amount of 100
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }

@@ -55,6 +55,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasDoubleTap(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(doubleTapPrice);
                         who.perksManager.AddDoubleTap(who);
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }

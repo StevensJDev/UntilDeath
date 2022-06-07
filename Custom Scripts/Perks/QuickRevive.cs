@@ -55,6 +55,7 @@ namespace MarsFPSKit
                     if (!main.myPlayer.perksManager.playerHasQuickRevive(who) && power.powerIsOn) {
                         zws.localPlayerData.SpendMoney(quickRevivePrice);
                         who.perksManager.AddQuickRevive(who, 200); // Adds speed by amount of 100
+                        main.gameInformation.statistics.AddPerk();//Call statistics
                     }
                 }
             }
