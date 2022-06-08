@@ -10,7 +10,6 @@ namespace MarsFPSKit
     public class PerkManagerControllerRuntimeData
     {
         public bool hasJuggernog;
-
         public bool hasSpeedCola;
         public bool hasDoubleTap;
         public bool hasQuickRevive;

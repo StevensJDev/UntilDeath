@@ -16,6 +16,7 @@ namespace MarsFPSKit
             /// Until which <see cref="PhotonNetwork.Time"/> should we live?
             /// </summary>
             public double liveUntil;
+            private bool paused;
 
             GameObject infiniteAmmoUI;
 
@@ -34,8 +35,13 @@ namespace MarsFPSKit
             {
                 if (photonView.IsMine)
                 {
-                    if (PhotonNetwork.Time >= liveUntil)
-                    {
+                    if (Time.timeScale == 0f && !paused) {
+                        liveUntil = liveUntil - PhotonNetwork.Time;
+                        paused = true;
+                    } else if (Time.timeScale == 1.0f && paused) {
+                        paused = false;
+                        liveUntil = PhotonNetwork.Time + liveUntil;
+                    } else if (Time.timeScale == 1.0f && PhotonNetwork.Time >= liveUntil) {
                         infiniteAmmoUI.SetActive(false);
                         PhotonNetwork.Destroy(gameObject);
                     }

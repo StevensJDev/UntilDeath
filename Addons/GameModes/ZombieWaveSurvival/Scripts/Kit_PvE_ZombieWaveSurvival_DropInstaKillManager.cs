@@ -16,6 +16,7 @@ namespace MarsFPSKit
             /// Until which <see cref="PhotonNetwork.Time"/> should we live?
             /// </summary>
             public double liveUntil;
+            private bool paused;
 
             GameObject instaKillUI;
 
@@ -33,6 +34,7 @@ namespace MarsFPSKit
             {
                 if (photonView.IsMine)
                 {
+                    
                     //Find all zombies
                     Kit_PvE_ZombieWaveSurvival_ZombieAI[] zombies = FindObjectsOfType<Kit_PvE_ZombieWaveSurvival_ZombieAI>();
 
@@ -42,8 +44,13 @@ namespace MarsFPSKit
                         zombies[i].InstaKill();
                     }
 
-                    if (PhotonNetwork.Time >= liveUntil)
-                    {
+                    if (Time.timeScale == 0f && !paused) {
+                        liveUntil = liveUntil - PhotonNetwork.Time;
+                        paused = true;
+                    } else if (Time.timeScale == 1.0f && paused) {
+                        paused = false;
+                        liveUntil = PhotonNetwork.Time + liveUntil;
+                    } else if (Time.timeScale == 1.0f && PhotonNetwork.Time >= liveUntil) {
                         for (int i = 0; i < zombies.Length; i++)
                         {
                             //Rest HP to original health 
