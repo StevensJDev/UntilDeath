@@ -1001,7 +1001,16 @@ namespace MarsFPSKit
                 #endregion
 
                 #region Score Menu
-                if (pauseMenuState == 0 && myPlayer.input.scoreboard && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId)) {
+                if (isScoreboardOpen && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.B))) {
+                    isScoreboardOpen = false;
+                    SwitchMenu(ingameFadeId, true);
+                    pluginOnForceClose.Invoke();
+                    //Lock cursor
+                    MarsScreen.lockCursor = true;
+                    //Chat callback
+                    chat.PauseMenuClosed();
+                }
+                if (pauseMenuState == 0 && !isPauseMenuOpen && myPlayer.input.scoreboard && (!loadoutMenu || loadoutMenu && currentScreen != loadoutMenu.menuScreenId)) {
                     isScoreboardOpen = !isScoreboardOpen;
                     if (isScoreboardOpen) {
                         SwitchMenu(scoreMenuId, true);
