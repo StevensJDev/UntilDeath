@@ -12,6 +12,7 @@ namespace MarsFPSKit
             /// Main reference
             /// </summary>
             public Kit_IngameMain main;
+            private Kit_PlayerBehaviour pb;
             private Kit_PvE_ZombieWaveSurvival zws;
             public TextMeshProUGUI nameUI;
             public TextMeshProUGUI scoreUI;
@@ -34,6 +35,13 @@ namespace MarsFPSKit
                 main = FindObjectOfType<Kit_IngameMain>();
                 if (main) {
                     zws = main.currentPvEGameModeBehaviour as Kit_PvE_ZombieWaveSurvival;
+                    // Find the current player
+                    for (int i = 0; i < main.allActivePlayers.Count; i--) {
+                        if (main.allActivePlayers[i].photonView.IsMine)
+                        {
+                            pb = main.allActivePlayers[i];
+                        }
+                    }
                 }
 
                 int money = zws.localPlayerData.getMoney();
@@ -59,7 +67,7 @@ namespace MarsFPSKit
                 nameUI.text = Kit_GameSettings.userName;
                 scoreUI.text = "$" + score;
                 killsUI.text = waveManager.zombiesKilled.ToString();
-                downsUI.text = downs;
+                downsUI.text = (pb.vitalsManager.getDowns()/2).ToString();
                 revivesUI.text = revives;
             }
         }

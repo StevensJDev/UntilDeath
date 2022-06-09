@@ -65,6 +65,7 @@ namespace MarsFPSKit
         private float runoutTimer = 10f;
         public float originalHeight = 1.2f;
         public float originalSpeed = 3f;
+        public int downs = 0;
 
         public override void ApplyHeal(Kit_PlayerBehaviour pb, float heal)
         {
@@ -259,6 +260,8 @@ namespace MarsFPSKit
         // Function that puts player health to zero, removes ui, turns screen black and white, and kills player when timer runs out.
         // hqr = Has Quick Revive
         public override void GoDown(Kit_PlayerBehaviour pb, string cause, bool botshot = false, int killer = 0, bool hqr = false) {
+            pb.main.gameInformation.statistics.OnDown();
+            downs++;
             ExitGames.Client.Photon.Hashtable table = PhotonNetwork.CurrentRoom.CustomProperties;
             // SinglePlayer and has QuickRevive
             if ((int)table["gameModeType"] == 0 && pb.perksManager.playerHasQuickRevive(pb)) { 
@@ -274,6 +277,8 @@ namespace MarsFPSKit
             }            
         }
 
+        public override int getDowns() { return downs; }
+
         // Function that revives player while they are down amd removes all perks after they get back up.
         public override void ReviveSP(Kit_PlayerBehaviour pb) {
             BootsOnGroundRuntimeData data = pb.customMovementData as BootsOnGroundRuntimeData;
@@ -283,7 +288,7 @@ namespace MarsFPSKit
 
             data.state = 1; // Crouch player
             pb.perksManager.RemoveAllPerks(pb);
-            // Change screen to show revive icon
+            // Change screen to show revive icon instead of text
             // TODO: Change effects on screen to make it appear the player is really hurt
                 // In cod zombies this is a black and white screen while camera bobs
         }
@@ -381,6 +386,7 @@ namespace MarsFPSKit
             BloodyScreenVitalsRuntimeData vrd = new BloodyScreenVitalsRuntimeData();
             //Set standard values
             vrd.hitPoints = 100f; // Starting health number
+            downs = 0;
             //Assign it
             pb.customVitalsData = vrd;
         }

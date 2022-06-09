@@ -274,6 +274,8 @@ namespace MarsFPSKit
             }
         }
 
+        public override int getDowns() { return 0; }
+
         // Function that revives player while they are down amd removes all perks after they get back up.
         public override void ReviveSP(Kit_PlayerBehaviour pb) {}
 

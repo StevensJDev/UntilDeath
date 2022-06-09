@@ -17,6 +17,10 @@ namespace MarsFPSKit
         /// Our accumulated deaths
         /// </summary>
         public int deaths;
+
+        public int downs;
+
+        public int revives;
         /// <summary>
         /// Our accumulated assists
         /// </summary>
@@ -43,6 +47,11 @@ namespace MarsFPSKit
         public override void OnDeath(Kit_IngameMain main, string weapon)
         {
             deaths++;
+        }
+
+        public override void OnDown()
+        {
+            downs++;
         }
 
         public override void OnKill(Kit_IngameMain main, int weapon)

@@ -18,6 +18,8 @@ namespace MarsFPSKit
         /// <param name="reason"></param>
         public abstract void OnKill(Kit_IngameMain main, string reason);
 
+        public abstract void OnDown();
+
         /// <summary>
         /// Ccalled when we score an assists
         /// </summary>
