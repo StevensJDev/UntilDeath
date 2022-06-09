@@ -612,10 +612,10 @@ namespace MarsFPSKit
                                             }
                                         }
 
-                                    }
-                                    //We cannot sprint
-                                    else
-                                    {
+                                    } else if (data.state == 1) {
+                                        data.state = 0;
+                                    } else {
+                                        //We cannot sprint
                                         data.isSprinting = false;
                                     }
                                 }

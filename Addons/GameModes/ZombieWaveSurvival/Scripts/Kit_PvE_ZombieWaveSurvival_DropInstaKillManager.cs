@@ -19,13 +19,17 @@ namespace MarsFPSKit
             private bool paused;
 
             GameObject instaKillUI;
+            Animator anim;
+            bool isPlaying = false;
 
             private void Start()
             {
+                isPlaying = false;
                 instance = this;
 
                 instaKillUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/InstaKill");
                 instaKillUI.SetActive(true);
+                anim = instaKillUI.GetComponent<Animator>();
                 //Set initial time
                 liveUntil = PhotonNetwork.Time + (float)photonView.InstantiationData[0];
             }
@@ -34,6 +38,10 @@ namespace MarsFPSKit
             {
                 if (photonView.IsMine)
                 {
+                    if ((liveUntil-PhotonNetwork.Time) <= 3.0f && !isPlaying) {
+                        anim.SetTrigger("dropIsClosing");
+                        isPlaying = true;
+                    }
                     
                     //Find all zombies
                     Kit_PvE_ZombieWaveSurvival_ZombieAI[] zombies = FindObjectsOfType<Kit_PvE_ZombieWaveSurvival_ZombieAI>();
@@ -57,6 +65,7 @@ namespace MarsFPSKit
                             zombies[i].OriginalHealth();
                         }
                         instaKillUI.SetActive(false);
+                        anim.ResetTrigger("dropIsClosing");
                         PhotonNetwork.Destroy(gameObject);
                     }
                 }
