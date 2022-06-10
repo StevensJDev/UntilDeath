@@ -139,7 +139,7 @@ namespace MarsFPSKit
             /// <summary>
             /// Did we login yet
             /// </summary>
-            private bool wasLoggedIn;
+            public bool wasLoggedIn;
 
             private void Awake()
             {

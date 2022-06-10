@@ -49,6 +49,11 @@ namespace MarsFPSKit
             /// Currently selected character
             /// </summary>
             private int spCurChar;
+            /// <summary>
+            /// Player state
+            /// </summary>
+            public Kit_MenuPlayerStateBase playerStateSP;
+            private bool playerStateUpdated;
 
             /// <summary>
             /// Displays the name of our selected map
@@ -79,6 +84,10 @@ namespace MarsFPSKit
             /// The text that displays our ready state
             /// </summary>
             public TextMeshProUGUI coopReadyButtonText;
+            /// <summary>
+            /// Player state
+            /// </summary>
+            public Kit_MenuPlayerStateBase playerStateMP;
 
             /// <summary>
             /// The "Content" object of the Scroll view, where playerEntriesPrefab will be instantiated
@@ -149,6 +158,7 @@ namespace MarsFPSKit
             void Awake()
             {
                 cachedRoomList = new Dictionary<string, RoomInfo>();
+                playerStateUpdated = false;
             }
             #endregion
 
@@ -209,15 +219,41 @@ namespace MarsFPSKit
                 SingleplayerNextMap();
             }
 
+            void Update() {
+                if (!menuManager) {
+                    return;
+                }
+                if (!playerStateUpdated && menuManager.wasLoggedIn) {
+                    if (playerStateSP)
+                    {
+                        playerStateSP.Initialize(menuManager);
+                        playerStateUpdated = true;
+                    }
+                    if (playerStateMP)
+                    {
+                        playerStateMP.Initialize(menuManager);
+                        playerStateUpdated = true;
+                    }
+                }
+            }
+
             public override void OpenMenu()
             {
                 if (myCurrentState == 0)
                 {
                     ChangeMenuButton(singleplayerMenuId);
+                    if (playerStateSP)
+                    {
+                        playerStateSP.Initialize(menuManager);
+                    }
                 }
                 else
                 {
                     ChangeMenuButton(coopMainMenuId);
+                    if (playerStateMP)
+                    {
+                        playerStateMP.Initialize(menuManager);
+                    }
                 }
             }
 
