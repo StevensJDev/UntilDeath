@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Linq;
 using UnityEngine;
+using BigBlit.ActivePack;
 
 namespace MarsFPSKit
 {
@@ -20,6 +21,7 @@ namespace MarsFPSKit
             [Header("Settings")]
 
             public bool powerIsOn = false;
+            public Lever lever;
 
             private void Start()
             {
@@ -41,6 +43,7 @@ namespace MarsFPSKit
             public override void Interact(Kit_PlayerBehaviour who)
             {
                 if (!powerIsOn) {
+                    lever.ToggleOn();
                     powerIsOn = true; // should be on for all players
                 }
             }

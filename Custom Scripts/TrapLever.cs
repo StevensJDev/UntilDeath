@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Linq;
 using UnityEngine;
+using BigBlit.ActivePack;
 
 namespace MarsFPSKit
 {
@@ -32,12 +33,14 @@ namespace MarsFPSKit
             private bool trapReady = true;
             public float trapCooldownTimer = 60f;
             private float timer = 0;        
+            public Lever lever;
 
             private void Start()
             {
                 //Find main reference
                 main = FindObjectOfType<Kit_IngameMain>();
                 damageObj.SetActive(false);
+                lever = this.gameObject.GetComponentInChildren<Lever>();
             }
 
             public override bool CanInteract(Kit_PlayerBehaviour who)
@@ -69,6 +72,8 @@ namespace MarsFPSKit
                     damageObj.SetActive(true);
                     trapReady = false;
                     trapRunning = true;
+                    lever.Toggle();
+                    otherTrap.GetComponent<TrapLever>().lever.ToggleOn();
                 }
             }
 
@@ -89,6 +94,8 @@ namespace MarsFPSKit
                         trapCoolingDown = false;
                         timer = 0;
                         trapReady = true;
+                        lever.Toggle();
+                        otherTrap.GetComponent<TrapLever>().lever.ToggleOff();
                     }
                 }
             }
