@@ -164,8 +164,10 @@ namespace MarsFPSKit
             {
                 yield return new WaitForEndOfFrame();
 
-                //Apply force
-                rigidbodies[ragdollId].AddForceAtPosition(force, point, ForceMode.Impulse);
+                if (rigidbodies[ragdollId]) {
+                    //Apply force
+                    rigidbodies[ragdollId].AddForceAtPosition(force, point, ForceMode.Impulse);
+                }
             }
         }
     }

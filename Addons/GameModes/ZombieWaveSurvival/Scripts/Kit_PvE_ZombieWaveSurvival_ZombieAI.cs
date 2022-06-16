@@ -471,7 +471,9 @@ namespace MarsFPSKit
 
             private void OnDestroy()
             {
-                if (!main.isShuttingDown)
+                if (!main) {
+                    // Do nothing
+                } else if (!main.isShuttingDown)
                 {
                     if (PhotonNetwork.IsMasterClient)
                     {

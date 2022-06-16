@@ -141,7 +141,9 @@ namespace MarsFPSKit
                             Kit_PlayerBehaviour player = affectedByExplosion[i].transform.root.GetComponent<Kit_PlayerBehaviour>();
                             if (!Physics.Linecast(transform.position, player.playerCameraTransform.position, linecastLayers))
                             {
-                                if (main.currentPvPGameModeBehaviour.ArePlayersEnemies(main, idWhoShot, botShot, player, true))
+                                if (!main) {
+                                    // Do Nothing
+                                } else if (main.currentPvPGameModeBehaviour.ArePlayersEnemies(main, idWhoShot, botShot, player, true))
                                 {
                                     player.LocalDamage(Mathf.SmoothStep(maxDamage, minDamage, Vector3.Distance(transform.position, adm.transform.position) / radius), gunID, transform.position, adm.transform.position - transform.position, ragdollForce, transform.position, adm.ragdollId, botShot, idWhoShot);
 
