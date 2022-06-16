@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MarsFPSKit
 {
@@ -40,7 +41,7 @@ namespace MarsFPSKit
                 if (photonView.IsMine)
                 {
                     if ((liveUntil-PhotonNetwork.Time) <= 3.0f && !isPlaying) {
-                        anim.SetTrigger("dropIsClosing");
+                        anim.SetBool("dropIsClosing", true);
                         isPlaying = true;
                     }
 
@@ -52,7 +53,7 @@ namespace MarsFPSKit
                         liveUntil = PhotonNetwork.Time + liveUntil;
                     } else if (Time.timeScale == 1.0f && PhotonNetwork.Time >= liveUntil) {
                         doublePointsUI.SetActive(false);
-                        anim.ResetTrigger("dropIsClosing");
+                        anim.SetBool("dropIsClosing", false);
                         PhotonNetwork.Destroy(gameObject);
                     }
                 }

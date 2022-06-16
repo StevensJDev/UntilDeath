@@ -612,7 +612,7 @@ namespace MarsFPSKit
                                             }
                                         }
 
-                                    } else if (data.state == 1) {
+                                    } else if (data.state == 1 && !pb.vitalsManager.canRevive()) {
                                         data.state = 0;
                                     } else {
                                         //We cannot sprint
@@ -739,7 +739,7 @@ namespace MarsFPSKit
                                 {
                                     data.state = 1;
                                 }
-                                else
+                                else if (!pb.vitalsManager.canRevive())
                                 {
                                     data.state = 0;
                                 }

@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MarsFPSKit
 {
@@ -39,7 +40,7 @@ namespace MarsFPSKit
                 if (photonView.IsMine)
                 {
                     if ((liveUntil-PhotonNetwork.Time) <= 3.0f && !isPlaying) {
-                        anim.SetTrigger("dropIsClosing");
+                        anim.SetBool("dropIsClosing", true);
                         isPlaying = true;
                     }
                     
@@ -65,7 +66,7 @@ namespace MarsFPSKit
                             zombies[i].OriginalHealth();
                         }
                         instaKillUI.SetActive(false);
-                        anim.ResetTrigger("dropIsClosing");
+                        anim.SetBool("dropIsClosing", false);
                         PhotonNetwork.Destroy(gameObject);
                     }
                 }
