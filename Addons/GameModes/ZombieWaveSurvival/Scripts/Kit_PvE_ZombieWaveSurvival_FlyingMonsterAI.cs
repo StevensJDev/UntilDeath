@@ -11,6 +11,9 @@ namespace MarsFPSKit
         public class Kit_PvE_ZombieWaveSurvival_FlyingMonsterAI :  MonoBehaviourPunCallbacks, IPunObservable
         {
             public Kit_PlayerBehaviour playerToAttack;
+            public GameObject waypoint1;
+            public GameObject waypoint2;
+            public bool harmfulToPlayer;
             public float distanceToPlayer = 10f;
             public float speed = .5f;
             /// <summary>
@@ -34,19 +37,24 @@ namespace MarsFPSKit
             }
 
             void Update() {
-                // Go towards player
-                if (playerToAttack) {
-                    float distance = Vector3.Distance (playerToAttack.gameObject.transform.position, transform.position);
-                    if (distance <= distanceToPlayer) {
-                        Vector3 targetPosition = new Vector3(playerToAttack.gameObject.transform.position.x, playerToAttack.gameObject.transform.position.y + 1.75f, playerToAttack.gameObject.transform.position.z);
-                        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                if (harmfulToPlayer) {
+                    // Go towards player
+                    if (playerToAttack) {
+                        float distance = Vector3.Distance (playerToAttack.gameObject.transform.position, transform.position);
+                        if (distance <= distanceToPlayer) {
+                            Vector3 targetPosition = new Vector3(playerToAttack.gameObject.transform.position.x, playerToAttack.gameObject.transform.position.y + 1.75f, playerToAttack.gameObject.transform.position.z);
+                            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                        }
+                    } else {
+                        if (main.allActivePlayers.Count > 0)
+                        {
+                            //Pick a random player to attack
+                            playerToAttack = main.allActivePlayers[Random.Range(0, main.allActivePlayers.Count)];
+                        }
                     }
                 } else {
-                    if (main.allActivePlayers.Count > 0)
-                    {
-                        //Pick a random player to attack
-                        playerToAttack = main.allActivePlayers[Random.Range(0, main.allActivePlayers.Count)];
-                    }
+                    Vector3 targetPosition = new Vector3(waypoint1.transform.position.x, waypoint1.transform.position.y - 5f, waypoint1.transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                 }
             }
 

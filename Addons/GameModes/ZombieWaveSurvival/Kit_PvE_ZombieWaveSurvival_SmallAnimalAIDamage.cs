@@ -60,6 +60,18 @@ namespace MarsFPSKit
                         damageable.ApplyDamage(damage);
                     }
                 }
+                
+                if (ai.harmfulToPlayer) {
+                    Kit_PlayerBehaviour pb = other.GetComponentInParent<Kit_PlayerBehaviour>();
+
+                    if (pb)
+                    {
+                        if (pb.photonView.IsMine)
+                        {
+                            pb.vitalsManager.ApplyEnvironmentalDamage(pb, damage, deathSoundCategory);
+                        }
+                    }
+                }
             }
         }
     }
