@@ -326,7 +326,7 @@ namespace MarsFPSKit
             {
                 if (menu.currentScreen == menuScreenId)
                 {
-                    menu.SwitchMenu(menu.mainScreen);
+                    menu.SwitchMenu(menu.previousScreen);
                 }
             }
 

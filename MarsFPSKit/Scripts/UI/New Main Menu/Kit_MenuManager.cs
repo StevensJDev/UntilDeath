@@ -115,7 +115,11 @@ namespace MarsFPSKit
             /// Do we have a screen to fade out?
             /// </summary>
             private bool wasFirstScreenFadedIn;
-            [HideInInspector]
+            // [HideInInspector]
+            /// <summary>
+            /// The menu screen that was selected before in case we need to go back to that instead.
+            /// </summary>
+            public int previousScreen;
             /// <summary>
             /// The menu screen that is currently visible (in order to fade it out)
             /// </summary>
@@ -242,6 +246,16 @@ namespace MarsFPSKit
             /// <param name="newMenu"></param>
             public void ChangeMenuButton(int newMenu)
             {
+                if (previousScreen == singleplayer.singleplayerScreenId) {
+                    if (currentScreen == options.optionsScreenId || currentScreen == loadout.menuScreenId) { // Change back to single player menu
+                        newMenu = singleplayer.singleplayerScreenId;
+                    }
+                } else if (previousScreen == 20 || previousScreen == 16 || previousScreen == 15) { // Bug where the screen numbers change, really should just set to previous screen anyways
+                    if (currentScreen == options.optionsScreenId || currentScreen == loadout.menuScreenId || currentScreen == friends.friendsScreenId) { // Change back to coop menu
+                        newMenu = previousScreen;
+                    }
+                }
+                
                 if (!isSwitchingScreens)
                 {
                     //Start the coroutine
@@ -335,6 +349,7 @@ namespace MarsFPSKit
 
             private IEnumerator SwitchRoutine(int newMenu)
             {
+                previousScreen = currentScreen;
                 //Set bool
                 isSwitchingScreens = true;
                 if (wasFirstScreenFadedIn)

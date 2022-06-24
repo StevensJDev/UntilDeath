@@ -41,6 +41,7 @@ namespace MarsFPSKit
             /// Currently selected map
             /// </summary>
             private int spCurMap;
+            public Image spMapImage;
             /// <summary>
             /// Displays the name of our selected character
             /// </summary>
@@ -64,6 +65,7 @@ namespace MarsFPSKit
             /// Currently selected map
             /// </summary>
             private int coopCurMap;
+            public Image cpMapImage;
             /// <summary>
             /// Displays the name of our selected character
             /// </summary>
@@ -317,6 +319,8 @@ namespace MarsFPSKit
                     spCurMap = 0;
                 }
 
+                spMapImage.sprite = menuManager.game.allSingleplayerGameModes[myId].maps[spCurMap].mapPicture;
+
                 RedrawSingleplayerMenu();
             }
 
@@ -328,6 +332,8 @@ namespace MarsFPSKit
                 {
                     spCurMap = menuManager.game.allSingleplayerGameModes[myId].maps.Length - 1;
                 }
+
+                spMapImage.sprite = menuManager.game.allSingleplayerGameModes[myId].maps[spCurMap].mapPicture;
 
                 RedrawSingleplayerMenu();
             }
@@ -461,6 +467,8 @@ namespace MarsFPSKit
                         coopCurMap = 0;
                     }
 
+                    cpMapImage.sprite = menuManager.game.allSingleplayerGameModes[myId].maps[coopCurMap].mapPicture;
+
                     RedrawCoopMenu();
 
                     //Send Event
@@ -481,6 +489,8 @@ namespace MarsFPSKit
                     {
                         coopCurMap = menuManager.game.allSingleplayerGameModes[myId].maps.Length - 1;
                     }
+
+                    cpMapImage.sprite = menuManager.game.allSingleplayerGameModes[myId].maps[coopCurMap].mapPicture;
 
                     RedrawCoopMenu();
 
@@ -645,11 +655,11 @@ namespace MarsFPSKit
                         
                         if (ready)
                         {
-                            coopReadyButtonText.text = "SET NOT READY";
+                            coopReadyButtonText.text = "READY";
                         }
                         else
                         {
-                            coopReadyButtonText.text = "SET READY";
+                            coopReadyButtonText.text = "NOT READY";
                         }
                     }
                     else
@@ -667,7 +677,7 @@ namespace MarsFPSKit
                         {
                             if (PhotonNetwork.IsMasterClient)
                             {
-                                coopStartButtonText.text = "START GAME";
+                                coopStartButtonText.text = "START";
                             }
                             else
                             {

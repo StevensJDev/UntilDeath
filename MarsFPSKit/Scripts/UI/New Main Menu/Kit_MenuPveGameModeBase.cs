@@ -86,7 +86,19 @@ namespace MarsFPSKit
 
             // Override because it wouldnt go back to beginning
             public void spBackToMainMenu() {
-                menuManager.ChangeMenuButton(1);
+                menuManager.ChangeMenuButton(menuManager.mainScreen);
+            }
+
+            public void spLoadout() {
+                menuManager.ChangeMenuButton(menuManager.loadout.menuScreenId);
+            }
+
+            public void spOptions() {
+                menuManager.ChangeMenuButton(menuManager.options.optionsScreenId);
+            }
+
+            public void coopFriends() {
+                menuManager.ChangeMenuButton(menuManager.friends.friendsScreenId);
             }
 
             public void BackToMainMenu()
