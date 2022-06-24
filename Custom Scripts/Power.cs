@@ -59,8 +59,13 @@ namespace MarsFPSKit
                 }
             }
 
-            [PunRPC]
             public override void Interact(Kit_PlayerBehaviour who)
+            {
+                photonView.RPC("MutliInteractRPC", RpcTarget.MasterClient, who);
+            }
+
+            [PunRPC]
+            public void MutliInteractRPC(Kit_PlayerBehaviour who)
             {
                 if (photonView.IsMine) {
                     if (!powerIsOn) {
