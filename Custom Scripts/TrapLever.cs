@@ -7,7 +7,7 @@ namespace MarsFPSKit
 {
     namespace ZombieWaveSurvival
     {
-        public class TrapLever : Kit_InteractableObject
+        public class TrapLever : Kit_InteractableObject, IPunObservable
         {
             /// <summary>
             /// Rerefence to zws
@@ -43,6 +43,32 @@ namespace MarsFPSKit
                 lever = this.gameObject.GetComponentInChildren<Lever>();
             }
 
+            void Update() {
+                if (!trapReady) {
+                    if (trapRunning && trapTimer >= timer) {
+                        damageObj.SetActive(true);
+                        lever.ToggleOn();
+                        otherTrap.GetComponent<TrapLever>().lever.ToggleOn();
+                        timer += Time.deltaTime;
+                    } else if (trapRunning && !trapCoolingDown) {
+                        trapRunning = false;
+                        damageObj.SetActive(false);
+                        trapCoolingDown = true;
+                        timer = 0;
+                    }
+
+                    if (trapCoolingDown && trapCooldownTimer >= timer) {
+                        timer += Time.deltaTime;
+                    } else if (!trapRunning && trapCoolingDown) {
+                        trapCoolingDown = false;
+                        timer = 0;
+                        trapReady = true;
+                        lever.ToggleOff();
+                        otherTrap.GetComponent<TrapLever>().lever.ToggleOff();
+                    }
+                }
+            }
+
             public override bool CanInteract(Kit_PlayerBehaviour who)
             {
                 if (!power.powerIsOn) {
@@ -64,41 +90,39 @@ namespace MarsFPSKit
                 return true;
             }
 
+            #region Photon
+            void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+            {
+                if (stream.IsWriting)
+                {
+                    stream.SendNext(trapReady);
+                    stream.SendNext(trapRunning);
+                }
+                else
+                {
+                    trapReady = (bool)stream.ReceiveNext();
+                    trapRunning = (bool)stream.ReceiveNext();
+                }
+            }
+
             public override void Interact(Kit_PlayerBehaviour who)
             {
                 if (zws.localPlayerData.money >= trapPrice)
                 {
                     zws.localPlayerData.SpendMoney(trapPrice);
-                    damageObj.SetActive(true);
-                    trapReady = false;
-                    trapRunning = true;
-                    lever.Toggle();
-                    otherTrap.GetComponent<TrapLever>().lever.ToggleOn();
+                    photonView.RPC("MutliInteractRPC", RpcTarget.MasterClient, who);
                 }
             }
 
-            void Update() {
-                if (!trapReady) {
-                    if (trapRunning && trapTimer >= timer) {
-                        timer += Time.deltaTime;
-                    } else if (trapRunning && !trapCoolingDown) {
-                        trapRunning = false;
-                        damageObj.SetActive(false);
-                        trapCoolingDown = true;
-                        timer = 0;
-                    }
-
-                    if (trapCoolingDown && trapCooldownTimer >= timer) {
-                        timer += Time.deltaTime;
-                    } else if (!trapRunning && trapCoolingDown) {
-                        trapCoolingDown = false;
-                        timer = 0;
-                        trapReady = true;
-                        lever.Toggle();
-                        otherTrap.GetComponent<TrapLever>().lever.ToggleOff();
-                    }
-                }
+            [PunRPC]
+            public void MutliInteractRPC(Kit_PlayerBehaviour who)
+            {
+                // TODO still only works for host in MP
+                trapReady = false;
+                trapRunning = true;
             }
+            #endregion
+
         }
     }
 }
