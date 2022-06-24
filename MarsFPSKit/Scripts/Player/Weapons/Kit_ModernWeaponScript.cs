@@ -968,7 +968,7 @@ namespace MarsFPSKit
                 {
                     WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
                     
-                    if (data.weaponRenderer.anim) {
+                    if (data.weaponRenderer.anim) { // TODO: Error during multiplayer?
                         if (hasDoubleTap) {
                         data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
                         }
@@ -3255,7 +3255,7 @@ namespace MarsFPSKit
                     {
                         WeaponControllerRuntimeData data = runtimeData as WeaponControllerRuntimeData;
 
-                        if (data.weaponRenderer.anim) {
+                        if (data.weaponRenderer.anim) { // TODO bug error when multiplayer?
                             if (hasDoubleTap) {
                                 data.weaponRenderer.anim.SetFloat("fireAnimationSpeed", animationMultiplier);
                             }

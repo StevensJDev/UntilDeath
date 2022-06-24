@@ -7,7 +7,7 @@ namespace MarsFPSKit
 {
     namespace ZombieWaveSurvival
     {
-        public class Power : Kit_InteractableObject
+        public class Power : Kit_InteractableObject, IPunObservable
         {
             /// <summary>
             /// Rerefence to zws
@@ -29,6 +29,12 @@ namespace MarsFPSKit
                 main = FindObjectOfType<Kit_IngameMain>();
             }
 
+            private void Update() {
+                if (powerIsOn) {
+                    lever.ToggleOn();
+                }
+            }
+
             public override bool CanInteract(Kit_PlayerBehaviour who)
             {
                 if(powerIsOn){
@@ -40,13 +46,29 @@ namespace MarsFPSKit
                 }
             }
 
-            public override void Interact(Kit_PlayerBehaviour who)
+            #region Photon
+            void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
             {
-                if (!powerIsOn) {
-                    lever.ToggleOn();
-                    powerIsOn = true; // should be on for all players
+                if (stream.IsWriting)
+                {
+                    stream.SendNext(powerIsOn);
+                }
+                else
+                {
+                    powerIsOn = (bool)stream.ReceiveNext();
                 }
             }
+
+            [PunRPC]
+            public override void Interact(Kit_PlayerBehaviour who)
+            {
+                if (photonView.IsMine) {
+                    if (!powerIsOn) {
+                        powerIsOn = true;
+                    }
+                }
+            }
+            #endregion
         }
     }
 }

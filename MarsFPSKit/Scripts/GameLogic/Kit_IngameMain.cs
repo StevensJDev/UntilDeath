@@ -2638,7 +2638,7 @@ namespace MarsFPSKit
 
         private IEnumerator PauseTime(bool pauseTime)
         {
-            if (pauseTime) {
+            if (pauseTime && PhotonNetwork.IsMasterClient) {
                 yield return new WaitForSecondsRealtime(.25f);
                 Time.timeScale = 0f; // PAUSE GAME
             } else {
