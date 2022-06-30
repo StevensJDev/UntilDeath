@@ -28,7 +28,7 @@ namespace MarsFPSKit
                 isPlaying = false;
                 instance = this;
 
-                infiniteAmmoUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/InfiniteAmmo");
+                infiniteAmmoUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/InfiniteAmmo");
                 infiniteAmmoUI.SetActive(true);
                 anim = infiniteAmmoUI.GetComponent<Animator>();
 

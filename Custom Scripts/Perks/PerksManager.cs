@@ -40,7 +40,7 @@ namespace MarsFPSKit
 
         public override void AddJuggernog(Kit_PlayerBehaviour pb, int healthNum)
         {
-            juggernogUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/JuggernogUI");
+            juggernogUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/JuggernogUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasJuggernog = true;
             pb.vitalsManager.ChangeHealth(pb, healthNum);
@@ -60,7 +60,7 @@ namespace MarsFPSKit
 
         public override void AddSpeedCola(Kit_PlayerBehaviour pb)
         {
-            speedcolaUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/SpeedColaUI");
+            speedcolaUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/SpeedColaUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasSpeedCola = true;
             speedcolaUI.SetActive(true);
@@ -79,7 +79,7 @@ namespace MarsFPSKit
 
         public override void AddDoubleTap(Kit_PlayerBehaviour pb)
         {
-            doubleTapUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/DoubleTapUI");
+            doubleTapUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/DoubleTapUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasDoubleTap = true;
             doubleTapUI.SetActive(true);
@@ -98,7 +98,7 @@ namespace MarsFPSKit
 
         public override void AddQuickRevive(Kit_PlayerBehaviour pb, int speedNum)
         {
-            quickReviveUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/QuickReviveUI");
+            quickReviveUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/QuickReviveUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasQuickRevive = true;
             quickReviveUI.SetActive(true);
@@ -117,7 +117,7 @@ namespace MarsFPSKit
 
         public override void AddStaminUp(Kit_PlayerBehaviour pb)
         {
-            staminUpUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/StaminUpUI");
+            staminUpUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/StaminUpUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasStaminUp = true;
             pb.updateStamina(7f, 5f, false);
@@ -138,7 +138,7 @@ namespace MarsFPSKit
 
         public override void AddBunnyHop(Kit_PlayerBehaviour pb)
         {
-            bunnyHopUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/BunnyHopUI");
+            bunnyHopUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/Perks/BunnyHopUI");
             PerkManagerControllerRuntimeData runtimeData = pb.customPerkManagerData as PerkManagerControllerRuntimeData;
             runtimeData.hasBunnyHop = true;
             pb.updateJumpMax(2);

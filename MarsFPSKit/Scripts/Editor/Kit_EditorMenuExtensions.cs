@@ -25,7 +25,7 @@ namespace MarsFPSKit
                         if (!FindObjectOfType<Kit_IngameMain>())
                         {
                             //Load prefab
-                            Object prefabLoaded = Resources.Load("MarsFPSKit_IngamePrefab");
+                            Object prefabLoaded = Resources.Load("GhostsMainKit_IngamePrefab");
                             if (prefabLoaded != null)
                             {
                                 GameObject prefab = prefabLoaded as GameObject;
@@ -102,12 +102,12 @@ namespace MarsFPSKit
                                 }
                                 else
                                 {
-                                    EditorUtility.DisplayDialog("Could not find prefab", "Did you rename the MarsFPSKit_IngamePrefab or move it out of the resources folder?", "OK");
+                                    EditorUtility.DisplayDialog("Could not find prefab", "Did you rename the GhostsMainKit_IngamePrefab or move it out of the resources folder?", "OK");
                                 }
                             }
                             else
                             {
-                                EditorUtility.DisplayDialog("Could not find prefab", "Did you rename the MarsFPSKit_IngamePrefab or move it out of the resources folder?", "OK");
+                                EditorUtility.DisplayDialog("Could not find prefab", "Did you rename the GhostsMainKit_IngamePrefab or move it out of the resources folder?", "OK");
                             }
                         }
                     }

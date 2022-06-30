@@ -23,7 +23,7 @@ namespace MarsFPSKit
             {
                 instance = this;
 
-                // infiniteAmmoUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/Curse");
+                // infiniteAmmoUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/Curse");
                 // infiniteAmmoUI.SetActive(true);
 
                 //Set initial time

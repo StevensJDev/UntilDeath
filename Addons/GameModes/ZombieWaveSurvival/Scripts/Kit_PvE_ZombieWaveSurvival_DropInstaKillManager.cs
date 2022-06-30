@@ -28,7 +28,7 @@ namespace MarsFPSKit
                 isPlaying = false;
                 instance = this;
 
-                instaKillUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/InstaKill");
+                instaKillUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/InstaKill");
                 instaKillUI.SetActive(true);
                 anim = instaKillUI.GetComponent<Animator>();
                 //Set initial time

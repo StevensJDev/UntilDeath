@@ -44,7 +44,7 @@ namespace MarsFPSKit
                 EditorGUILayout.HelpBox("Kit_IngameMain not found", MessageType.Error);
                 if (GUILayout.Button("Fix"))
                 {
-                    Object prefabLoaded = Resources.Load("MarsFPSKit_IngamePrefab");
+                    Object prefabLoaded = Resources.Load("GhostsMainKit_IngamePrefab");
                     if (prefabLoaded != null)
                     {
                         GameObject prefab = prefabLoaded as GameObject;
@@ -63,7 +63,7 @@ namespace MarsFPSKit
 
             EditorGUI.BeginDisabledGroup(!FindObjectOfType<Kit_IngameMain>());
             //Get main
-            Kit_GameInformation gameInformation = (Resources.Load("MarsFPSKit_IngamePrefab") as GameObject).GetComponent<Kit_IngameMain>().gameInformation;
+            Kit_GameInformation gameInformation = (Resources.Load("GhostsMainKit_IngamePrefab") as GameObject).GetComponent<Kit_IngameMain>().gameInformation;
             GUILayout.Label("Info status", EditorStyles.boldLabel);
             if (!IsMapAdded(gameInformation))
             {

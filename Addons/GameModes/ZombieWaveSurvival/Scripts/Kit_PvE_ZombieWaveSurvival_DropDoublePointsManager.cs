@@ -29,7 +29,7 @@ namespace MarsFPSKit
                 isPlaying = false;
                 instance = this;
 
-                doublePointsUI = GameObject.Find("MarsFPSKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/DoublePoints");
+                doublePointsUI = GameObject.Find("GhostsMainKit_IngamePrefab/UI/HUD/Root/Root (Can be hidden)/TempDropsUI/DoublePoints");
                 doublePointsUI.SetActive(true);
                 anim = doublePointsUI.GetComponent<Animator>();
                 //Set initial time

@@ -408,7 +408,7 @@ namespace MarsFPSKit
                     //Check if everyone is dead
                     if (pb.main.allActivePlayers.Count <= 0 || (pb.main.allActivePlayers.Count == 1 && pb.main.allActivePlayers[0] == pb))
                     {
-                        GameObject scoreMenu = GameObject.Find("MarsFPSKit_IngamePrefab/UI/Score Menu");
+                        GameObject scoreMenu = GameObject.Find("GhostsMainKit_IngamePrefab/UI/Score Menu");
                         scoreMenu.SetActive(true);
                         pb.main.gameInformation.statistics.Save(pb.main);
                         Debug.Log("Everyone is dead. Game over.");
@@ -445,7 +445,7 @@ namespace MarsFPSKit
                     //Check if everyone is dead
                     if (pb.main.allActivePlayers.Count <= 0 || (pb.main.allActivePlayers.Count == 1 && pb.main.allActivePlayers[0] == pb))
                     {
-                        GameObject scoreMenu = GameObject.Find("MarsFPSKit_IngamePrefab/UI/Score Menu");
+                        GameObject scoreMenu = GameObject.Find("GhostsMainKit_IngamePrefab/UI/Score Menu");
                         scoreMenu.SetActive(true);
                         Debug.Log("Everyone is dead. Game over.");
                         //Set to -1
