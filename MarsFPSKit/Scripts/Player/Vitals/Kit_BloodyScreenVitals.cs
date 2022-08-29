@@ -374,8 +374,10 @@ namespace MarsFPSKit
                     {
                         pb.deathSoundID = pb.voiceManager.GetDeathSoundID(pb, pb.deathSoundCategory);
                     }
-                    GoDown(pb, "-1");
-                    // pb.Die(-1);
+                    // GoDown(pb, "-1");
+                    pb.main.gameInformation.statistics.OnDown();
+                    downs++;
+                    pb.Die(-1);
                 }
             }
         }

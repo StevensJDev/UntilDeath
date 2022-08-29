@@ -32,8 +32,14 @@ namespace MarsFPSKit
             public override void OnCreate(TextMeshProUGUI txt, Button button)
             {
                 buttonScript = button.GetComponent<Kit_OptionsButtonScript>();
+                buttonScript.setUpKeys();
                 TextMeshProUGUI bTxt = button.GetComponentInChildren<TextMeshProUGUI>();
-                bTxt.text = PlayerPrefs.GetString(rebindType, "Undefined");
+                string rebindsKey = PlayerPrefs.GetString(rebindType, "Undefined");
+                bTxt.text = rebindsKey;
+
+                if(buttonScript.keys.ContainsKey(rebindsKey)) {
+                    buttonScript.keyImage.sprite = buttonScript.keys[rebindsKey];
+                }
             }
 
             public override void OnButtonChange(TextMeshProUGUI txt, Button button)

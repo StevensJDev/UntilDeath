@@ -109,7 +109,7 @@ namespace MarsFPSKit
                             Kit_PlayerBehaviour player = affectedByExplosion[i].transform.root.GetComponent<Kit_PlayerBehaviour>();
                             if (!Physics.Linecast(transform.position, player.playerCameraTransform.position, linecastLayers))
                             {
-                                if (main.currentPvPGameModeBehaviour.ArePlayersEnemies(main, idWhoShot, botShot, player, true))
+                                if (!main.currentPvPGameModeBehaviour || (main.currentPvPGameModeBehaviour && main.currentPvPGameModeBehaviour.ArePlayersEnemies(main, idWhoShot, botShot, player, true)))
                                 {
                                     if (!blindedPlayers.Contains(player))
                                     {
