@@ -53,7 +53,6 @@ namespace MarsFPSKit
          
 
 
-        // TODO: Call when exiting the options/controls menu
         public override void InitializeControls(Kit_PlayerBehaviour pb)
         {
             DefaultInputData did = new DefaultInputData();

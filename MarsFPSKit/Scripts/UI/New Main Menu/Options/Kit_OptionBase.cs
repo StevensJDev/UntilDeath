@@ -6,7 +6,7 @@ namespace MarsFPSKit
 {
     namespace UI
     {
-        public enum OptionType { Slider, Dropdown, Toggle, Button }
+        public enum OptionType { Slider, Dropdown, Toggle, Button, ResetButton }
 
         public abstract class Kit_OptionBase : ScriptableObject
         {
@@ -67,6 +67,8 @@ namespace MarsFPSKit
             {
 
             }
+
+            public virtual void onResetButtonClick(){ }
         }
     }
 }

@@ -8,8 +8,8 @@ public class Kit_OptionsButtonScript : MonoBehaviour
 {
     public GameObject rebindFade;
     public Image keyImage;
-    private string RebindsKey = "";
-    private string RebindType = "";
+    public string RebindsKey = "";
+    public string RebindType = "";
     private bool isRebinding;
 
     public Sprite[] keySprites;
@@ -48,6 +48,14 @@ public class Kit_OptionsButtonScript : MonoBehaviour
         PlayerPrefs.SetString(RebindType, RebindsKey);
         rebindFade.SetActive(false);
         isRebinding = false;
+    }
+
+    public void KeysUpdated() {
+        string key = PlayerPrefs.GetString(RebindType, "Undefined");
+
+        if(keys.ContainsKey(key)) {
+            keyImage.sprite = keys[key];
+        }
     }
 
     public void setUpKeys() {

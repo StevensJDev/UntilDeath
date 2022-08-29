@@ -33,8 +33,11 @@ namespace MarsFPSKit
             {
                 buttonScript = button.GetComponent<Kit_OptionsButtonScript>();
                 buttonScript.setUpKeys();
+                buttonScript.RebindType = rebindType;
                 TextMeshProUGUI bTxt = button.GetComponentInChildren<TextMeshProUGUI>();
+                
                 string rebindsKey = PlayerPrefs.GetString(rebindType, "Undefined");
+                buttonScript.RebindsKey = rebindsKey;
                 bTxt.text = rebindsKey;
 
                 if(buttonScript.keys.ContainsKey(rebindsKey)) {

@@ -67,6 +67,10 @@ namespace MarsFPSKit
             /// Button prefab
             /// </summary>
             public GameObject optionButton;
+            /// <summary>
+            /// Reset Button prefab
+            /// </summary>
+            public GameObject resetButton;
 
             /// <summary>
             /// Category ID
@@ -170,6 +174,22 @@ namespace MarsFPSKit
                             Button button = option.GetComponentInChildren<Button>();
                             categories[id].options[od].OnCreate(oTxt, button);
                             button.onClick.AddListener(delegate { categories[id].options[od].OnButtonChange(oTxt, button); });
+
+                            //Add
+                            optionsCategories[id][od] = option;
+                            //Hide
+                            option.SetActive(false);
+                        }
+                        else if (categories[i].options[o].GetOptionType() == OptionType.ResetButton) 
+                        {
+                            GameObject option = Instantiate(resetButton, optionsListGo, false);
+                            EventTrigger et = option.AddComponent<EventTrigger>();
+                            EventTrigger.Entry hover = new EventTrigger.Entry();
+                            hover.eventID = EventTriggerType.PointerEnter;
+                            hover.callback.AddListener(delegate { Hover(id, od); });
+                            et.triggers.Add(hover);
+                            Button button = option.GetComponentInChildren<Button>();
+                            button.onClick.AddListener(delegate { categories[id].options[od].onResetButtonClick(); });
 
                             //Add
                             optionsCategories[id][od] = option;
