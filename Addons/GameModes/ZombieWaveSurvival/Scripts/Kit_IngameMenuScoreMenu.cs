@@ -66,8 +66,8 @@ namespace MarsFPSKit
 
                 nameUI.text = Kit_GameSettings.userName;
                 scoreUI.text = "$" + score;
-                killsUI.text = waveManager.zombiesKilled.ToString();
-                downsUI.text = (pb.vitalsManager.getDowns()/2).ToString();
+                killsUI.text = waveManager.zombiesKilled.ToString(); // Should only be amount player has killed
+                downsUI.text = pb.vitalsManager.getDowns().ToString();
                 revivesUI.text = revives;
             }
         }

@@ -157,6 +157,7 @@ namespace MarsFPSKit
                         //Check for death
                         if (vrd.hitPoints <= 0)
                         {
+                            downs++;
                             // Before player dies, need to go down until they arent revived.
                             GoDown(pb, deathCause, botShot, idWhoShot);
                         }
@@ -192,6 +193,7 @@ namespace MarsFPSKit
                     //Check for death
                     if (vrd.hitPoints <= 0)
                     {
+                        downs++;
                         //Reset player force
                         pb.ragdollForce = 0f;
                         // Before player dies, need to go down until they arent revived.
@@ -228,6 +230,7 @@ namespace MarsFPSKit
                     //Check for death
                     if (vrd.hitPoints <= 0)
                     {
+                        downs++;
                         //Reset player force
                         pb.ragdollForce = 0f;
                         // Before player dies, need to go down until they arent revived.
@@ -241,6 +244,7 @@ namespace MarsFPSKit
         {
             if (pb.customVitalsData != null && pb.customVitalsData.GetType() == typeof(BloodyScreenVitalsRuntimeData))
             {
+                downs++;
                 //Reset player force
                 pb.ragdollForce = 0f;
                 GoDown(pb, "-3");
@@ -261,7 +265,6 @@ namespace MarsFPSKit
         // hqr = Has Quick Revive
         public override void GoDown(Kit_PlayerBehaviour pb, string cause, bool botshot = false, int killer = 0, bool hqr = false) {
             pb.main.gameInformation.statistics.OnDown();
-            downs++;
             ExitGames.Client.Photon.Hashtable table = PhotonNetwork.CurrentRoom.CustomProperties;
             // SinglePlayer and has QuickRevive
             if ((int)table["gameModeType"] == 0 && pb.perksManager.playerHasQuickRevive(pb)) { 

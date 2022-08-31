@@ -1059,6 +1059,8 @@ namespace MarsFPSKit
                         else
                         {
                             canResume = true;
+                            //Lock cursor
+                            MarsScreen.lockCursor = true;
                             //Chat callback
                             chat.PauseMenuClosed();
                         }
