@@ -44,10 +44,13 @@ namespace MarsFPSKit
                         if (distance <= distanceToPlayer) {
                             Vector3 targetPosition = new Vector3(playerToAttack.gameObject.transform.position.x, playerToAttack.gameObject.transform.position.y + 1.75f, playerToAttack.gameObject.transform.position.z);
                             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                            transform.LookAt(playerToAttack.gameObject.transform);
+                            transform.LookAt(playerToAttack.gameObject.transform.position + 90f * Vector3.left, -180f * Vector3.up);
                         }
                     } else {
                         if (main.allActivePlayers.Count > 0)
                         {
+                            // TODO: replace with nearest random player
                             //Pick a random player to attack
                             playerToAttack = main.allActivePlayers[Random.Range(0, main.allActivePlayers.Count)];
                         }

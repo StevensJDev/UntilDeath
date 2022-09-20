@@ -1,6 +1,9 @@
 using Photon.Pun;
 using System.Linq;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using MarsFPSKit.Weapons;
 
 namespace MarsFPSKit
 {
@@ -106,18 +109,33 @@ namespace MarsFPSKit
                     if (!mysteryBoxActivated) {
                         zws.localPlayerData.SpendMoney(mysteryBoxPrice);
                         // Select random weapon
-                        startGeneration();
+                        startGeneration(who);
                     } else {
                         gatherWeapon(who);
                     }
                 }
             }
 
-            public void startGeneration() {
+            public void startGeneration(Kit_PlayerBehaviour who) {
                 mysteryBoxActivated = true;
                 isGeneratingWeapon = true;
                 generationDone = false;
-                weaponToBuy = Random.Range(1, 16);
+                List<int> weapons = new List<int>();
+                for(int i = 1; i < 17; i++) {
+                    weapons.Add(i);
+                }
+
+                WeaponManagerControllerRuntimeData runtimeData = who.customWeaponManagerData as WeaponManagerControllerRuntimeData;
+                int weaponId1 = runtimeData.weaponsInUse[0].weaponsInSlot[0].id;
+                int weaponId2 = runtimeData.weaponsInUse[1].weaponsInSlot[0].id;
+                
+                // Remove currently selected weapon numbers from the array
+                for (int i = 0; i < weapons.Count; i++) {
+                    if (weapons[i] == weaponId1 || weapons[i] == weaponId2) {
+                        weapons.RemoveAt(i);
+                    }
+                }
+                weaponToBuy = weapons[Random.Range(1, weapons.Count)];
             }
 
             public void gatherWeapon(Kit_PlayerBehaviour who) {

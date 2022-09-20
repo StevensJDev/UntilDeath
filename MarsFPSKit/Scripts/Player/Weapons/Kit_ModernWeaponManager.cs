@@ -504,7 +504,7 @@ namespace MarsFPSKit
                             }
 
                             //Check if we can do a quick use!
-                            if (runtimeData.currentWeapon[0] == runtimeData.desiredWeapon[0] && runtimeData.currentWeapon[1] == runtimeData.currentWeapon[1] && !runtimeData.quickUseInProgress && !runtimeData.switchInProgress)
+                            if (runtimeData.currentWeapon[0] == runtimeData.desiredWeapon[0] && !runtimeData.quickUseInProgress && !runtimeData.switchInProgress)
                             {
                                 for (int i = 0; i < runtimeData.weaponsInUse.Length; i++)
                                 {
