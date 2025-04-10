@@ -14,11 +14,16 @@ namespace MarsFPSKit
             /// Where will the player land?
             /// </summary>
             public GameObject teleportationDestination;
+            public bool canTeleport = false;
 
             public override bool CanInteract(Kit_PlayerBehaviour who)
             {
-                interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to teleport.";
-                return true;
+                if (canTeleport) {
+                    interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to teleport.";
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             public override void Interact(Kit_PlayerBehaviour who)

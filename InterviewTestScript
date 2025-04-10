@@ -1,0 +1,119 @@
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
+
+
+
+class Result
+{
+    // Cursor always starts at 0 (or it should)
+    cursorPos = 0;
+    private static StringBuilder str = new StringBuilder();
+    private static List<string> printedStrings = new List<string>();
+
+    /*
+     * Insert function that inserts a string at the current cursor position.
+     */
+    public static void insert(string s) {
+        str.Insert(cursorPos, s);
+        cursorPos += s.Length;
+    }
+
+    /*
+     * Print function that prints the string from the cursor position to the cursor position + x.
+     * If the cursor position + x is greater than the string length, print the string from the cursor position to the end of the string.
+     */
+    public static void print(string x) {
+        int start = Math.Max(0, cursorPos - x);
+        int end = Math.Min(str.Length, cursorPos + x);
+        string printed = str.ToString().Substring(start, end - start);
+        printedStrings.Add(printed);
+    }
+
+    /*
+     * Left function that moves the cursor to the left by x positions.
+     * If the cursor position - x is less than 0, set the cursor position to 0.
+     */
+    public static void left(int x) {
+        cursorPos = Math.Max(0, cursorPos - x);
+    }
+
+    /*
+     * Right function that moves the cursor to the right by x positions.
+     */
+    public static void right(int x) {
+        cursorPos = Math.Min(str.Length, cursorPos + x);
+    }
+
+    /*
+     * Backspace function that deletes the character to the left of the cursor by x positions.
+     * If the cursor position - x is less than 0, delete all characters from the start of the string to the cursor position.
+     */
+    public static void backspace(int x) {
+        int start = Math.Max(0, cursorPos - x);
+        str.Remove(start, cursorPos - start);
+        cursorPos = start;
+    }
+
+    /*
+     * Delete function that deletes the character to the right of the cursor by x positions.
+     * If the cursor position + x is greater than the string length, delete all characters from the cursor position to the end of the string.
+     */
+    public static List<string> delete(int x) {
+        int end = Math.Min(str.Length, cursorPos + x);
+        str.Remove(cursorPos, end - cursorPos);
+    }
+
+    /*
+     * Complete the 'getPrintedStrings' function below.
+     *
+     * The function is expected to return a STRING_ARRAY.
+     * The function accepts 2D_STRING_ARRAY commands as parameter.
+     */
+
+    public static List<string> getPrintedStrings(List<List<string>> commands)
+    {
+        foreach (var command in commands)
+        {
+            string cmd = command[0];
+            string arg = command.Count > 1 ? command[1] : null;
+
+            switch (cmd)
+            {
+                case "Insert":
+                    insert(arg);
+                    break;
+                case "Print":
+                    print(int.Parse(arg));
+                    break;
+                case "Left":
+                    left(int.Parse(arg));
+                    break;
+                case "Right":
+                    right(int.Parse(arg));
+                    break;
+                case "Backspace":
+                    backspace(int.Parse(arg));
+                    break;
+                case "Delete":
+                    delete(int.Parse(arg));
+                    break;
+                default:
+                    throw new ArgumentException("Unknown command: " + cmd);
+            }
+        }
+
+        return printedStrings;
+    }
+
+}

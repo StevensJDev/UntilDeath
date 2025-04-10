@@ -16,10 +16,13 @@ namespace MarsFPSKit
             /// Is the box filled with enough souls?
             /// </summary>
             public bool boxFilled;
+            public EasterEgg easterEgg;
 
             void Update() {
-                if (ghostsKilled >= numberOfSouls) {
+                Debug.Log(ghostsKilled);
+                if (ghostsKilled >= numberOfSouls && !boxFilled) {
                     boxFilled = true;
+                    easterEgg.activateSoulBox();
                 }
             }
 

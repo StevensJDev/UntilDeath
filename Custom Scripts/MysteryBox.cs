@@ -120,10 +120,8 @@ namespace MarsFPSKit
                 mysteryBoxActivated = true;
                 isGeneratingWeapon = true;
                 generationDone = false;
-                List<int> weapons = new List<int>();
-                for(int i = 1; i < 17; i++) {
-                    weapons.Add(i);
-                }
+                int[] hardCodedList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+                List<int> weapons = new List<int>(hardCodedList);
 
                 WeaponManagerControllerRuntimeData runtimeData = who.customWeaponManagerData as WeaponManagerControllerRuntimeData;
                 int weaponId1 = runtimeData.weaponsInUse[0].weaponsInSlot[0].id;

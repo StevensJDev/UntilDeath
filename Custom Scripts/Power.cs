@@ -21,6 +21,7 @@ namespace MarsFPSKit
             [Header("Settings")]
 
             public bool powerIsOn = false;
+            public LightPower lightPower;
             public Lever lever;
 
             private void Start()
@@ -70,6 +71,7 @@ namespace MarsFPSKit
                 if (photonView.IsMine) {
                     if (!powerIsOn) {
                         powerIsOn = true;
+                        lightPower.lightsOn = true;
                     }
                 }
             }

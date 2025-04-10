@@ -156,7 +156,7 @@ namespace MarsFPSKit
                 }
                 else
                 {
-                    Debug.LogWarning("[Zombie] Footstep triggered but triggered footstep was not found in the array", this);
+                    // Debug.LogWarning("[Zombie] Footstep triggered but triggered footstep was not found in the array", this); // Dont need since we likely wont be using footsteps for ghosts
                 }
             }
 

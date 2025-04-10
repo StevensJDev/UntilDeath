@@ -618,7 +618,9 @@ namespace MarsFPSKit
                                 if (pb.isFirstPersonActive)
                                 {
                                     pb.main.hud.DisplayWeaponPickup(false);
-                                    pb.main.hud.DisplayInteraction(true, io.interactionText);
+                                    if (io.CanInteract(pb)) {
+                                        pb.main.hud.DisplayInteraction(true, io.interactionText);                                    
+                                    }
                                 }
 
                                 if (io.CanInteract(pb))

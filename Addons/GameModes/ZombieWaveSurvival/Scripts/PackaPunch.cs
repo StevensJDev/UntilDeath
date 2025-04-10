@@ -99,7 +99,7 @@ namespace MarsFPSKit
                     interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] for upgraded weapon.";
                     return true;
                 } else if (weaponId1 == 0 && weaponId2 == 0) {
-                    interactionText = "";
+                    interactionText = "You have no weapon :c";
                     return false;
                 } else {
                     interactionText = "Press [" + PlayerPrefs.GetString("Interact", "F") + "] to upgrade weapon [$" + packaPunchPrice + "]";
